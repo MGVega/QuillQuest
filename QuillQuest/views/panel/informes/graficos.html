@@ -1,0 +1,115 @@
+<h3>Gráficas sobre las encuestas</h3>
+
+<!--<div class="row margin-top20">
+
+    <div class="col-md col-xs-6">
+        <label for="dates" >Date range </label>
+        <input id="dates" type="input" class="form-control" value="">
+    </div>
+</div>-->
+
+<div class="row margin-top20">
+
+    <div class="col-md-6">
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title mb-0">Ciudades:</h4>
+                    </div>
+                </div>
+                <div class="c-chart-wrapper margin-top10">
+                    <canvas class="chart chartGraficos" id="ciudades-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="col-md-6">
+        
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title mb-0">Provincias:</h4>
+                    </div>
+                </div>
+                <div class="c-chart-wrapper margin-top10">
+                    <canvas class="chart chartGraficos" id="provincias-chart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+    
+    
+</div>
+
+<div class="row margin-top20">
+
+    <div class="col-md-6">
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title mb-0">Comunidades autónomas:</h4>
+                    </div>
+                </div>
+                <div class="c-chart-wrapper margin-top10">
+                    <canvas class="chart chartGraficos" id="comunidades-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title mb-0">Países:</h4>
+                    </div>
+                </div>
+                <div class="c-chart-wrapper margin-top10">
+                    <canvas class="chart chartGraficos" id="paises-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+
+<div class="row ">
+
+    [s/foreach from=$dataCharts item=chart/s]
+    <div class="col-md-3 margin-top20">
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <strong>[s/$chart->titulo/s]</strong>
+                    </div>
+                </div>
+                <div class="c-chart-wrapper margin-top10">
+                    <canvas class="chart chartGraficos" id="chart[s/$chart->pregunta_id/s]"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    [s//foreach/s]
+
+</div>
+

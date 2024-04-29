@@ -1,0 +1,188 @@
+<main id="wrapper" class="active">
+    <div id="container" class="margin-bottom40">
+        <h3 class="margin-bottom20">Listado de rutas creadas</h3>
+        <table id="tablaRutas" class="datatable display">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Dificultad</th>
+                    <th>Km</th>
+                    <th>Tipo</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <div class="table-content">
+                    [s/foreach from=$listaRutas item=ruta/s]
+                    <tr>
+                        <td>[s/$ruta->titulo/s]</td>
+                        <td>[s/if $ruta->dificultad==1/s]Fácil[s/elseif $ruta->dificultad==2/s]Moderada[s/elseif $ruta->dificultad==3/s]Difícil[s//if/s]</td>
+                        <td>[s/$ruta->km/s]</td>
+                        <td>[s/if $ruta->tipo_ruta==1/s]Senderismo[s/elseif $ruta->tipo_ruta==2/s]Bicicleta[s//if/s]</td>
+
+                        <td class="text-center">
+
+                            <div class="row">
+                                <div class="col-md-6 color1">
+                                    <i class="fas fa-pencil cursor_pointer" onclick="modalModifMore([s/$ruta->ruta_id/s]);"></i>
+                                </div>
+                                <div class="col-md-6 colorError">
+                                    <i class="fas fa-times cursor_pointer" onclick="modalDeleteMore([s/$ruta->ruta_id/s]);"></i>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                    [s//foreach/s]
+                </div>
+            </tbody>
+        </table>
+
+        [s/foreach from=$listaRutas item=ruta/s]
+        
+        <div id="modal_modif_[s/$ruta->ruta_id/s]" class="hidden-print modal fade">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+
+                        <form id="formularioModif[s/$ruta->ruta_id/s]">
+                        <div class="text-20">
+                            <strong>Modificar ruta: </strong>[s/$ruta->titulo/s]
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="ruta_titulo">Título:</label>
+                                <input type="text" class="form-control form-control-inline mb-2" id="ruta_titulo" name="ruta_titulo" value="[s/$ruta->titulo/s]">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="ruta_descripcion">Descripción:</label>
+                                <textarea class="form-control eventPreguntaTipo mb-2" id="ruta_descripcion" name="ruta_descripcion" rows="3">[s/$ruta->descripcion/s]</textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8 d-flex align-items-center">
+                                    <div class="row">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label for="ruta_imagen">Imagen: </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 mb-2">
+                                                <input type="file" class="form-control" id="ruta_imagen" name="ruta_imagen" />
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                                [s/if $ruta->imagen != ""/s]
+                            <div class="col-4 text-center opcionRuta">
+                                <a id="rutaImg" href="[s/$ruta->imagen/s]" download="ruta_[s/$ruta->titulo/s]"><img src="[s/$ruta->imagen/s]" class="rounded"></a>
+                            </div>
+                                [s//if/s]
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="ruta_link_descarga">Fichero:</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <input type="file" class="form-control mb-2" id="ruta_link_descarga" name="ruta_link_descarga" />
+                            </div>
+                            [s/if $ruta->link_descarga != ""/s]
+                            <div class="col-4 text-center opcionRuta">
+                                <a id="rutaFile" href="[s/$ruta->link_descarga/s]" download=""><i class="fa-solid fa-file-arrow-down fa-xl"></i></a>
+                            </div>
+                            [s//if/s]
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <label for="ruta_dificultad">Dificultad:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="ruta_dificultad" id="dificultad_1" value="1" [s/if $ruta->dificultad==1/s]checked[s//if/s]>
+                                    <label class="form-check-label" for="dificultad_1">
+                                        Fácil
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="ruta_dificultad" id="dificultad_2" value="2" [s/if $ruta->dificultad==2/s]checked[s//if/s]>
+                                    <label class="form-check-label" for="dificultad_2">
+                                        Moderada
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="ruta_dificultad" id="dificultad_3" value="3" [s/if $ruta->dificultad==3/s]checked[s//if/s]>
+                                    <label class="form-check-label mb-2" for="dificultad_3">
+                                        Difícil
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="ruta_km">Distancia (Kilómetros):</label>
+                                <input type="number" class="form-control mb-2" id="ruta_km" name="ruta_km" value="[s/$ruta->km/s]"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="ruta_tipo">Tipo de ruta:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="ruta_tipo" id="ruta_tipo_1" value="1" [s/if $ruta->tipo_ruta==1/s]checked[s//if/s]>
+                                    <label class="form-check-label" for="ruta_tipo_1">
+                                        Senderismo
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="ruta_tipo" id="ruta_tipo_2" value="2" [s/if $ruta->tipo_ruta==2/s]checked[s//if/s]>
+                                    <label class="form-check-label mb-2" for="ruta_tipo_2">
+                                        Bicicleta
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn backgroundGrey" data-bs-dismiss="modal" onclick="closeModal('modal_modif_[s/$ruta->ruta_id/s]');">Cancelar</button>
+                        <button type="button" class="btn background_color1 colorWhite" onclick="rutaRequest('update',[s/$ruta->ruta_id/s])">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="modal_delete_[s/$ruta->ruta_id/s]" class="hidden-print modal fade">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+
+                        <div class="text-20">
+                            <strong>Eliminar ruta: [s/$ruta->titulo/s]</strong>
+                        </div>
+
+                        <div class="row margin-top20">
+                            <div class="col-md-12">
+                                <p>¿Deseas borrar esta ruta? (Los cambios no podrán deshacerse).</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn backgroundGrey" data-bs-dismiss="modal" onclick="closeModal('modal_delete_[s/$ruta->ruta_id/s]');">Cancelar</button>
+                        <button type="button" class="btn background_error colorWhite" onclick="borrarRuta([s/$ruta->ruta_id/s]);">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        [s//foreach/s]
+        
+    </div>
+</main>

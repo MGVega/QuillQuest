@@ -1,0 +1,160 @@
+<div class="bodyEncuesta">
+    <form id="formularioEncuesta" class="formularioEncuesta container-fluid main_container">
+        <div class="contenedorEncuesta container">
+            <div id="encInicio" class="encPortada row">
+                <div class="bannerEncuesta col-md-6">
+                    <h2>Ayuntamiento<br>de<br>Mirandilla</h2><br>
+                    <img src="images/escudoMirandilla.png" alt=""/>
+                </div>
+                <div class="encDivisor col-md"></div>
+                <div class="encAccion col-md-6">
+                    <h1>Encuesta</h1><br>
+                    <p>Esto es una encuesta totalmente anónima para saber más sobre su visita. No le tomará más de un par de minutos.</p>
+                    <button id="btnEncComenzar" class="btnEncuesta" type="button" onclick="encuestaSiguiente(1)">Comenzar</button>
+                </div>
+            </div>
+        </div>
+        <!-- - - - - - - - - - - - - - - - - - - - - INICIO - - - - - - - - - - - - - - - - - - - - -->
+        [s/$contadorPregunta = 0/s]
+        <div class="contenedorEncuesta">
+            [s/foreach from=$datosPreguntas item=pregunta name=encuesta/s]
+            [s/$contadorPregunta = $contadorPregunta + 1/s]
+            [s/$contadorPreguntaSig = $contadorPregunta + 1/s]
+            [s/$contadorPreguntaVolver = $contadorPregunta - 1/s]
+            [s/if $pregunta->visible==1/s]
+            <div class="contenedorPregunta row justify-content-center" id="encPregunta[s/$contadorPregunta/s]" style="display:none; text-align:center">
+                <div class="agruparContenido">
+
+                    <div class="tituloPregunta col-md-6 justify-content-center">
+                        <h3>[s/$contadorPregunta/s]. [s/$pregunta->titulo/s]</h3>
+                    </div>
+                    <div class="contenidoPregunta col-md-6" id="contenidoPregunta[s/$pregunta->pregunta_id/s]">
+
+                        <!-- - - - - - - - - - - - - - - - - - - - -  Pregunta selección - - - - - - - - - - - - - - - - - - - - -->
+                        [s/if $pregunta->pregunta_tipo_id==1/s]
+                        [s/assign var="contadorSelect" value=$pregunta->selects|count/s]
+                        
+                        [s/math assign="numCol" equation='x/y' x=12 y=$contadorSelect/s]
+                        <div class="row preguntaSelect">
+
+                            <div class="col-md-[s/$numCol/s]">
+                                <select class="form-control " id="preguntaSelect" tipo_pregunta="[s/$pregunta->pregunta_tipo_id/s]">
+                                    <option value="0">Seleccione país</option>
+                                    [s/foreach from=$paises item=pais/s]
+                                    <option value="[s/$pais->country_id/s]" class="eventCountry">[s/$pais->name/s]</option>
+                                    [s//foreach/s]
+                                </select>
+                            </div>
+
+                            <div class="col-md-[s/$numCol/s]">
+                                <select class="form-control preguntaSelect" id="provinciaEncuesta">
+                                    <option value="0">Seleccione provincia</option>
+                                    [s/foreach from=$provincias item=provincia/s]
+                                    <option value="[s/$provincia->state_id/s]" country_id="[s/$provincia->country_id/s]" class="eventState">[s/$provincia->name/s]</option>
+                                    [s//foreach/s]
+                                </select>
+                            </div>
+
+                            <!--<div class="col-md-4">
+                                <select class="form-control preguntaSelect" id="localidadEncuesta">
+                                    <option value="0">Seleccione ciudad</option>
+                                    [s/foreach from=$ciudades item=ciudad/s]
+                                    <option value="[s/$ciudad->city_id/s]" country_id="[s/$ciudad->country_id/s]" state_id="[s/$ciudad->state_id/s]" class="eventCity">[s/$ciudad->name/s]</option>
+                                    [s//foreach/s]
+                                </select>
+                            </div>-->
+
+                        </div>
+
+                        [s/elseif $pregunta->pregunta_tipo_id==2/s] 
+                        <!-- - - - - - - - - - - - - - - - - - - - -  Pregunta múltiple simple - - - - - - - - - - - - - - - - - - - - -->
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                [s/foreach from=$datosPreguntasOpciones item=opcion/s]
+                                [s/if $pregunta->pregunta_id==$opcion->pregunta_id/s]
+                                <div class="preguntaMultiple d-grid gap-0">
+                                    <input type="radio" id="opcion[s/$opcion->opcion_id/s]" name="tipo[s/$pregunta->pregunta_tipo_id/s]respuesta[s/$pregunta->pregunta_id/s]" value="[s/$opcion->opcion_id/s]" class="btn-check">
+                                    <label for="opcion[s/$opcion->opcion_id/s]" class="btn">[s/$opcion->nombre/s]</label>
+                                </div>
+                                [s//if/s]
+                                [s//foreach/s]
+                            </div>
+                        </div>
+
+                        [s/elseif $pregunta->pregunta_tipo_id==3/s]
+                        <!-- - - - - - - - - - - - - - - - - - - - -  Pregunta múltiple varias - - - - - - - - - - - - - - - - - - - - -->
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                [s/foreach from=$datosPreguntasOpciones item=opcion/s]
+                                [s/if $pregunta->pregunta_id==$opcion->pregunta_id/s]
+                                <div class="preguntaMultiple d-grid gap-0" pregunta_id="[s/$pregunta->pregunta_id/s]">
+                                    <input type="checkbox" id="opcion[s/$opcion->opcion_id/s]" class="eventPregunta[s/$pregunta->pregunta_id/s] btn-check" name="tipo[s/$pregunta->pregunta_tipo_id/s]respuesta[s/$pregunta->pregunta_id/s]opcion[s/$opcion->opcion_id/s]" value="[s/$opcion->opcion_id/s]">
+                                    <label for="opcion[s/$opcion->opcion_id/s]" class="btn">[s/$opcion->nombre/s]</label>
+                                </div>
+                                [s//if/s]
+                                [s//foreach/s]
+                            </div>
+                        </div>
+
+                        [s/elseif $pregunta->pregunta_tipo_id==4/s]
+                        <!-- - - - - - - - - - - - - - - - - - - - -  Pregunta Si/No - - - - - - - - - - - - - - - - - - - - -->
+                        <div class="preguntaSiNo">
+                            <label><input type="radio" id="preg[s/$pregunta->pregunta_id/s]campo1" name="tipo[s/$pregunta->pregunta_tipo_id/s]respuesta[s/$pregunta->pregunta_id/s]" value="1" checked>
+                                <span>SI</span></label><!--
+                            --><label><input type="radio" id="preg[s/$pregunta->pregunta_id/s]campo1" name="tipo[s/$pregunta->pregunta_tipo_id/s]respuesta[s/$pregunta->pregunta_id/s]" value="2">
+                                <span>NO</span></label>
+                        </div>
+
+                        [s/elseif $pregunta->pregunta_tipo_id==5/s]
+                        <!-- - - - - - - - - - - - - - - - - - - - -  Pregunta texto libre - - - - - - - - - - - - - - - - - - - - -->
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <textarea id="preg[s/$pregunta->pregunta_id/s]" name="tipo[s/$pregunta->pregunta_tipo_id/s]respuesta[s/$pregunta->pregunta_id/s]" rows="5" style="resize: none" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        [s/elseif $pregunta->pregunta_tipo_id==6/s]
+                        <!-- - - - - - - - - - - - - - - - - - - - -  Pregunta numero libre - - - - - - - - - - - - - - - - - - - - -->
+                        <input type="number" class="form-control" id="preg[s/$pregunta->pregunta_id/s]" min="0" name="tipo[s/$pregunta->pregunta_tipo_id/s]respuesta[s/$pregunta->pregunta_id/s]">
+                        [s//if/s]
+                        <div class="preguntaOtros margin-top10">
+                            [s/if $pregunta->activar_otros==1/s]
+                            <label>Otros (por favor especifique):</label> <input class="form-control" type="text" name="tipo[s/$pregunta->pregunta_tipo_id/s]respuesta[s/$pregunta->pregunta_id/s]Otros" value="">
+                            [s//if/s]
+                        </div>
+                        <div class="contenedorBotones">
+                            [s/if $pregunta->pregunta_id!=1/s]
+                            <button class="btnEncuesta" type="button" onclick="encuestaVolver([s / $contadorPreguntaVolver / s])">◄ Volver</button>
+                            [s//if/s]
+                            [s/if !$smarty.foreach.encuesta.last/s]
+                            <button class="btnEncuesta" type="button" onclick="encuestaSiguiente([s / $contadorPreguntaSig / s])">Siguiente ►</button>
+                            [s/elseif $smarty.foreach.encuesta.last/s]
+                            <button class="btnEncuesta" type="button" onclick="encuestaEnviarDatos()">Finalizar</button>
+                            [s//if/s]
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            [s//if/s]
+            [s//foreach/s]
+        </div>
+        <!-- - - - - - - - - - - - - - - - - - - - - FIN - - - - - - - - - - - - - - - - - - - - -->
+        <div class="contenedorEncuesta container" id="encPreguntaFin">
+            <div id="encFin" class="encFinal row">
+                <div class="bannerEncuesta col-md-6" >
+                    <h2>Ayuntamiento<br>de<br>Mirandilla</h2><br>
+                    <img src="images/escudoMirandilla.png" alt="" class=""/>
+                </div>
+                <div class="encDivisor"></div>
+                <div class="encAccion col-md-6">
+                    <h2>¡Muchas gracias!</h2>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

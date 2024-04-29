@@ -1,0 +1,91 @@
+
+<div class="row margin-top20">
+
+    <div class="col-md-3">
+
+        <table class="datatable display width100 nowrap" id="informesPreguntasLocalidad">
+            <thead>
+                <tr>
+                    <th class="text-center">Localidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                [s/foreach from=$resultados item=res/s]
+                [s/if $res->nombre_select=='Localidad'/s]
+                <tr>
+                    <td class="text-center">[s/$res->nombre_ciudad/s]</td>
+                </tr>
+                [s//if/s]
+                [s//foreach/s]
+
+            </tbody>
+        </table>
+
+    </div>
+    
+    <div class="col-md-3">
+
+        <table class="datatable display width100 nowrap" id="informesPreguntasProvincia">
+            <thead>
+                <tr>
+                    <th class="text-center">Provincia</th>
+                </tr>
+            </thead>
+            <tbody>
+                [s/foreach from=$resultados item=res/s]
+                [s/if $res->nombre_select=='Provincia'/s]
+                <tr>
+                    <td class="text-center">[s/$res->nombre_provincia/s]</td>
+                </tr>
+                [s//if/s]
+                [s//foreach/s]
+
+            </tbody>
+        </table>
+
+    </div>
+    
+    <div class="col-md-3">
+
+        <table class="datatable display width100 nowrap" id="informesPreguntasComunidad">
+            <thead>
+                <tr>
+                    <th class="text-center">Comunidad autónoma</th>
+                </tr>
+            </thead>
+            <tbody>
+                [s/foreach from=$resultados item=res/s]
+                [s/if $res->nombre_select=='Comunidad autónoma'/s]
+                <tr>
+                    <td class="text-center">[s/$res->nombre_comunidad/s]</td>
+                </tr>
+                [s//if/s]
+                [s//foreach/s]
+
+            </tbody>
+        </table>
+
+    </div>
+    
+    <div class="col-md-3">
+
+        <table class="datatable display width100 nowrap" id="informesPreguntasPais">
+            <thead>
+                <tr>
+                    <th class="text-center">País</th>
+                </tr>
+            </thead>
+            <tbody>
+                [s/foreach from=$resultados item=res/s]
+                [s/if $res->nombre_select=='País'/s]
+                <tr>
+                    <td class="text-center">[s/$res->nombre_pais/s]</td>
+                </tr>
+                [s//if/s]
+                [s//foreach/s]
+
+            </tbody>
+        </table>
+
+    </div>
+</div>

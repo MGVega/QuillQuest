@@ -1,0 +1,43 @@
+<main>
+    <section>
+        <div class="container text-16">
+            <h3 class="color3 margin-top-page" onload="contadorVisitas();">Rutas</h3>
+            <div class="separadorWeb"></div>
+
+            <div id="rutasWeb" class="container-fluid">
+                <div class="row justify-content-center">
+                    [s/foreach from=$datosRutas item=ruta name=rutas/s]
+                    <div class="col-md-4">
+                        <div class="card col-lg-12 col-md-12 col-sm-12 col-xs-12 shadow margin-top20">
+                            <div class="card-header">
+                                <h5 class="card-title color3 text_center cardRutas_head"><strong>[s/$ruta->titulo/s]</strong></h5>
+                            </div>
+                            <div class="card-body">
+                                
+                                [s/if $ruta->imagen!=''/s]
+                                <div class="text_center divImgRutas">
+                                    <img src="[s/$ruta->imagen/s]" alt="[s/$ruta->titulo/s]">
+                                </div>
+                                
+                                [s//if/s]
+                                <div class="textRutas">
+                                <p class="card-text margin-top10 ">[s/$ruta->descripcion|truncate:150:"..."/s]</p>
+                                </div>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><span class="color3">Dificultad:</span> [s/if $ruta->dificultad==1/s]Fácil[s/elseif $ruta->dificultad==2/s]Moderada[s/elseif $ruta->dificultad==3/s]Difícil[s//if/s]</li>
+                                <li class="list-group-item"><span class="color3">Kilómetros:</span> [s/$ruta->km/s]</li>
+                                <li class="list-group-item"><span class="color3">Tipo:</span> [s/if $ruta->tipo_ruta==1/s]Senderismo[s/elseif $ruta->tipo_ruta==2/s]Bicicleta[s//if/s]</li>
+                            </ul>
+                            <div class="card-footer margin_auto text_center botonWeb">
+                                <a href="rutaSeleccionada/[s/$ruta->ruta_id/s]" class="btn background_color4">Detalles <i class="fa-solid fa-caret-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    [s//foreach/s]
+                </div>
+            </div>
+            
+        </div>
+    </section>
+</main>

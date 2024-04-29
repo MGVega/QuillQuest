@@ -1,0 +1,502 @@
+/*
+Developed by wilowi
+*/
+/* 
+    Created on : 02-may-2020
+    Author     : Sandra <wilowi.com>
+*/
+
+@CHARSET "UTF-8";
+
+@-webkit-viewport {
+    width: device-width;
+}
+@-moz-viewport { 
+    width: device-width;
+}
+@-o-viewport {
+    width: device-width;
+}
+@-ms-viewport {
+    width: device-width;
+}
+@viewport {
+    width: device-width;
+}
+
+/*@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');*/
+
+/*@font-face {
+  font-family: myFont;
+  src: url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+}
+
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{
+    display: block;
+}
+
+button{
+
+    -webkit-appearance: none;
+    border: none;	
+}*/
+
+
+/* CSS reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
+    margin:0;
+    padding:0;
+}
+html,body {
+    margin:0;
+    padding:0;
+}
+
+html{
+    height: 100%;
+}
+
+body{
+    font-family: 'Source Sans Pro', sans-serif !important;
+    padding-right: 0px !important;
+}
+
+
+img{
+    max-width: 100%;
+    max-height: 100%;
+    border: none;
+}
+
+.modal-open {
+    overflow:auto;
+    padding-right: 0px !important;
+}
+
+html,body {
+    margin:0;
+    padding:0;
+}
+
+html{
+    height: 100%;
+}
+
+body{
+    font-family: 'Source Sans Pro', sans-serif !important;
+    padding-right: 0px !important;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+a:hover{
+    text-decoration: none !important;
+}
+
+a:focus{
+    text-decoration: none !important;
+}
+
+a.disabled {
+    pointer-events: none;
+}
+
+.notDisplay{
+    display: none !important;
+}
+
+.visHidden{
+    visibility: hidden;
+}
+
+.cursor_pointer{
+    cursor: pointer;
+}
+.text_center{
+    text-align: center;
+}
+
+.text_left{
+    text-align: left;
+}
+
+.text_right{
+    text-align: right;
+}
+
+position_relative{
+    position: relative;
+}
+
+/* --- COLORS --- */
+
+.colorWhite{
+    color: white !important;
+}
+
+.colorWhite span{
+    color: white !important;
+}
+
+.colorGrey{
+    
+    color: #f8f9fa;
+}
+
+.color1{
+    color: #76AADB;
+}
+
+.color2{
+    color: #dbe9f6;
+}
+
+.color3{
+    color: #e38b00;
+}
+
+.color4{
+    color: #ffbc44;
+}
+
+.color6{
+    color: #c62d4d;
+}
+
+.colorBlack{
+    color: #333333;
+}
+
+colorInfo{
+    color: #007aa5;
+}
+
+.colorWarning{
+    color: #F7BA22;
+}
+
+.colorError{
+    color: #f05c4e;
+}
+
+.background_black{
+    background-color: #000000;
+}
+
+.backgroundWhite{
+    background-color: white;
+}
+
+.border-white{
+    border: 1px solid white;
+}
+
+.border-grey{
+    border: 1px solid grey !important;
+}
+
+.border-radius5{
+    border-radius: .25rem;
+}
+
+.backgroundGrey{
+    background-color: #f5f6f8 !important;
+}
+
+.background_info{
+	background-color: #007aa5 !important;
+}
+
+.background_warning{
+	background-color: #F7BA22 !important;
+}
+
+.background_error{
+	background-color: #f05c4e !important;
+}
+
+.background_color1{
+    
+    background-color: #76AADB !important;
+}
+
+.background_color2{
+    
+    background-color: #dbe9f6 !important;
+}
+
+.background_color3{
+    background-color: #e38b00 !important;
+}
+
+.background_color4{
+    background-color: #ffbc44 !important;
+}
+
+.background_color6{
+    background-color: #c62d4d !important;
+}
+
+.border_top{
+    border-top: 1px solid grey;
+}
+
+.border_bottom{
+    border-bottom: 1px solid grey;
+}
+
+
+.text-10{
+    font-size: 10px;
+}
+
+.text-11{
+    font-size: 11px;
+}
+
+.text-12{
+    font-size: 12px;
+}
+
+.text-14{
+    font-size: 14px;
+}
+
+.text-16{
+    font-size: 16px;
+}
+
+.text-18{
+    font-size: 18px;
+}
+
+.text-20{
+    font-size: 20px;
+}
+
+.text-22{
+    font-size: 22px;
+}
+
+.text-25{
+    font-size: 25px;
+}
+
+.text-30{
+    font-size: 30px;
+}
+
+.text-icon{
+    font-size: 48px;
+}
+
+.text_bold{
+    font-weight: bold;
+}
+
+.text_bold span{
+    font-weight: normal;
+}
+
+.padding-top5{
+    padding-top: 5px;
+}
+
+.padding-top10{
+    padding-top: 10px;
+}
+
+.padding-bottom10{
+    padding-bottom: 10px;
+}
+
+.padding-top20{
+    padding-top: 20px;
+}
+
+.padding-top40{
+    padding-top: 40px;
+}
+
+.padding-bottom4{
+    padding-bottom: 4px;
+}
+
+.padding-bottom20{
+    padding-bottom: 20px;
+}
+
+.padding-bottom22{
+    padding-bottom: 22px;
+}
+
+.padding-bottom23{
+    padding-bottom: 23px;
+}
+
+.padding-bottom30{
+    padding-bottom: 30px !important;
+}
+
+.padding-bottom35{
+    padding-bottom: 35px !important;
+}
+
+
+.padding-bottom40{
+    padding-bottom: 40px !important;
+}
+
+.padding-bottom50{
+    padding-bottom: 50px !important;
+}
+
+.padding-bottom45{
+    padding-bottom: 45px !important;
+}
+
+.padding-right10{
+    padding-right: 10px;
+}
+
+.padding-right40{
+    padding-right: 40px;
+}
+
+.padding-left10{
+    padding-left: 10px;
+}
+
+.padding-left40{
+    padding-left: 40px;
+}
+
+.padding10{
+    padding: 10px;
+}
+.padding20{
+    padding: 20px;
+}
+
+.padding40{
+    padding: 40px;
+}
+
+.margin10{
+    margin: 10px;
+}
+
+.margin20{
+    margin: 20px;
+}
+
+.margin-top40{
+    margin-top: 40px;
+}
+
+.margin-top60{
+    margin-top: 60px;
+}
+
+.margin-top20{
+    margin-top: 20px !important;
+}
+
+.margin-top10{
+    margin-top: 10px !important;
+}
+
+.margin-bottom40{
+    margin-bottom: 40px;
+}
+
+.margin-bottom20{
+    margin-bottom: 20px;
+}
+
+.margin-top14{
+    margin-top: 14px;
+}
+
+.position_relative{
+    position: relative;
+}
+
+.form-control{
+    box-shadow: none !important;
+}
+
+a.disabled{
+    color: grey !important;
+    pointer-events: none;
+}
+
+.page-selected{
+    border-bottom-color: #ffa60a !important;
+    pointer-events: none;
+}
+
+.float_left{
+    float: left;
+}
+
+.float_right{
+    float: right;
+}
+
+.clear_both{
+    clear: both;
+}
+
+.displayNone{
+    
+    display: none !important;
+}
+
+.loading-div{
+    width: 100px;
+    height: 100%;
+    margin: auto;
+    display: none;
+}
+
+.marginAuto{
+    margin: auto;
+}
+
+.width100{
+    width: 100%;
+}
+
+/* Flash*/
+.animated {
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+@-webkit-keyframes flash {
+    0%, 50%, 100% {
+	opacity: 1;
+    }
+    25%, 75% {
+	opacity: 0;
+    }
+}
+@keyframes flash {
+    0%, 50%, 100% {
+	opacity: 1;
+    }
+    25%, 75% {
+	opacity: 0;
+    }
+}
+.flash {
+    -webkit-animation-name: flash;
+    animation-name: flash;
+}
+

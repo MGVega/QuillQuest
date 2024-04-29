@@ -1,0 +1,50 @@
+<h3>Listado de preguntas creadas</h3>
+
+<div class="row margin-top20">
+    
+    <div class="col-md-12">
+        
+        <table class="datatable width100" id="listadoPreguntas">
+            <thead>
+                <tr>
+                    <th class="text-left">Id</th>
+                    <th class="text-center">Título</th>
+                    <th class="text-center">Tipo de pregunta</th>
+                    <th class="text-center">Visible</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                [s/foreach from=$preguntas item=pregunta/s]
+                <tr>
+                    <td class="text-left color5"><strong>[s/$pregunta->pregunta_id/s]</strong></td>
+                    <td class="text-center">[s/$pregunta->titulo/s]</td>
+                    <td class="text-center">[s/$pregunta->nombre_tipo/s]</td>
+                    <td class="text-center">
+                        [s/if $pregunta->visible==1/s]
+                        <a href="#" class="text-success" onclick="preguntaRequest('deactivate',[s/$pregunta->pregunta_id/s])">
+                            <i class="fas fa-toggle-on" title="Desactivar pregunta"></i>
+                        </a>
+                        [s/else/s]
+                        <a href="#" class="text-secondary" onclick="preguntaRequest('activate',[s/$pregunta->pregunta_id/s])">
+                            <i class="fas fa-toggle-off" title="Activar pregunta"></i>
+                        </a>
+                        [s//if/s]
+                    </td>
+                    <td class="text-center">
+                        
+                        <div class="row">
+                            <div class="col-md-12 color1">
+                                <i class="fas fa-pencil-alt cursor_pointer" onclick="verPreguntaPage([s/$pregunta->pregunta_id/s]);" title="Modificar pregunta"></i>
+                            </div>                            
+                        </div>
+                        
+                    </td>
+
+                </tr>
+                [s//foreach/s]
+            </tbody>
+        </table>
+        
+    </div>
+</div>

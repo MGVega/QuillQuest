@@ -1,0 +1,45 @@
+<section id="formulario">
+    <!-- Aquí va el formulario que se debe enviar a un técnico del Ayuntamiento -->
+    <div class="contenedor center">
+        <h1 class="color3">Panel de administración</h1>
+    </div>
+
+    <div class="container">
+        
+        <div id="resultLogin" class="text-18">
+            
+        </div>
+
+        <div class="row padding20">
+            <div class="col-md-12">
+                <label for="nombre" class="labelGrey">Usuario</label> 
+                <input size="1" type="text" name="usuario" id="usuario" class="allWidth input_contact form-control" placeholder="Usuario" required="required" aria-required="true">
+            </div>
+
+            <div class="col-md-12 margin-top10">
+                <label for="email" class="labelGrey">Contraseña</label>
+                <input type="password" name="password" id="password" class="allWidth input_contact form-control" placeholder="Contraseña" required="required" aria-required="true">
+            </div>
+
+        </div>
+        
+        <div class="margin-top10 padding10">
+            <div class="g-recaptcha" data-sitekey="[s/$reCaptcha/s]" data-callback="onSubmit" data-expired-callback="onExpire"></div>
+
+        </div>
+
+
+        <div class="row padding40">
+            <div class="col-md-12">
+                <button class="btn btnSubmitSolicitud cursor_pointer notDisplay" onclick="doLogin();" disabled id="btnLogin">
+                    Entrar
+                </button>
+            </div>
+        </div>
+        
+
+
+    </div>
+
+
+</section>

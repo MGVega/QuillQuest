@@ -1,0 +1,27 @@
+{
+    "name": "mirandilla/mirandilla",
+    "description": "Web para Mirandilla del proyecto Pueblos Inteligentes",
+    "authors": [
+        {
+            "name": "Sandra Campos",
+            "email": "admin@wilowi.com",
+            "role": "Developer",
+            "homepage": "https://www.wilowi.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "5.2.*",
+        "twbs/bootstrap": "5.2.*",
+        "fortawesome/font-awesome": "6.*",
+        "smarty/smarty": "4.2.*",
+        "components/jquery": "3.*",
+        "components/jqueryui": "1.*"
+    },
+    "config": {
+        "vendor-dir": "vendor"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    }
+}

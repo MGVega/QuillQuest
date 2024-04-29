@@ -1,0 +1,1000 @@
+
+/* 
+    Created on :  8 agosto 2022
+    Author     : Sandra
+*/
+
+body{
+    height: 100%;
+}
+
+.form-control-dark {
+    border-color: var(--bs-gray);
+}
+.form-control-dark:focus {
+    border-color: #fff;
+    box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
+}
+
+.text-small {
+    font-size: 85%;
+}
+
+.dropdown-toggle {
+    outline: 0;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.b-example-divider {
+    height: 3rem;
+    background-color: rgba(0, 0, 0, .1);
+    border: solid rgba(0, 0, 0, .15);
+    border-width: 1px 0;
+    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+}
+
+.b-example-vr {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 100vh;
+}
+
+.bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+}
+
+.nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}/* ----------------------------------------------------------------
+        estilos CSS
+-----------------------------------------------------------------*/
+
+.red {
+    color:#B42D24;
+}
+.white {
+    color:#fff;
+}
+.black {
+    color:black;
+}
+.title-1 {
+    font-size: 40px;
+}
+.title-2 {
+    font-size: 30px;
+}
+.title-3 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* --------------------------------------
+        Columns & Grids
+------------------------------------------*/
+
+.col_full {
+    width: 100%;
+}
+.col_half,
+.postcontent.bothsidebar {
+    width: 45%;
+}
+.col_one_third {
+    width: 30.63%;
+}
+.col_two_third {
+    width: 65.33%;
+}
+.col_one_fourth,
+.sidebar {
+    width: 22%;
+}
+.col_three_fourth,
+.postcontent {
+    width: 74%;
+}
+.col_one_fifth {
+    width: 16.8%;
+}
+.col_two_fifth {
+    width: 37.6%;
+}
+.col_three_fifth {
+    width: 58.4%;
+}
+.col_four_fifth {
+    width: 79.2%;
+}
+.col_one_sixth {
+    width: 13.33%;
+}
+.col_five_sixth {
+    width: 82.67%;
+}
+body.stretched .container-fullwidth {
+    position: relative;
+    padding: 0 60px;
+    width: 100%;
+}
+
+.postcontent,
+.sidebar,
+.col_full,
+.col_half,
+.col_one_third,
+.col_two_third,
+.col_three_fourth,
+.col_one_fourth,
+.col_one_fifth,
+.col_two_fifth,
+.col_three_fifth,
+.col_four_fifth,
+.col_one_sixth,
+.col_five_sixth {
+    display: block;
+    position: relative;
+    margin-right: 4%;
+    margin-bottom: 50px;
+    float: left;
+}
+
+.col_full {
+    clear: both;
+    float: none;
+    margin-right: 0;
+}
+
+.col_last {
+    margin-right: 0 !important;
+    float: right;
+    clear: right;
+}
+
+.clearfix::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.center {
+    /* IMPORTANTE */
+    text-align: center;
+}
+
+.col-3 {
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+}
+
+
+/* --------------------------------------
+       Personalización botón
+------------------------------------------*/
+
+.button-circle {
+    border-radius: 20px;
+}
+.button-red
+{
+    background-color: #B42D24;
+    color: #FFF;
+}
+.button-withe
+{
+    background-color: #fff;
+    color: #B42D24;
+}
+.button {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    white-space: nowrap;
+    margin: 5px;
+    padding: 0 22px;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+}
+.ancho-completo {
+    width:100%;
+}
+
+/* ----------------------------------------------------------------
+        Contenedores
+-----------------------------------------------------------------*/
+
+.fondo {
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.fondo-footer {
+    height: 500px;
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.contenedor {
+    /* IMPORTANTE */
+    padding: 5% 10%;
+}
+
+.contenedorHeader {
+    /* IMPORTANTE */
+    padding: 0% 10%;
+}
+
+.container_buscador{
+    padding: 2% 5%;
+}
+
+.form50{
+
+    width: 50%;
+}
+
+.form33{
+    width: 33%;
+}
+
+.allWidth{
+    width: 100%;
+}
+
+.width98{
+    width: 95%;
+}
+
+.labelGrey{
+    color: #7a7a7a;
+}
+
+
+.btnSubmitSolicitud{
+
+    display: inline-block;
+    line-height: 1;
+    background-color: #e38b00 !important;
+    color: #ffffff;
+    min-height: 40px;
+    font-size: 15px;
+    padding: 12px 24px;
+    border-radius: 3px;
+    text-align: center;
+    transition: all .3s;
+    width: 100%;
+
+}
+
+.btnVolver{
+
+    display: inline-block;
+    line-height: 1;
+    background-color: #B42D24;
+    color: #ffffff;
+    min-height: 40px;
+    font-size: 15px;
+    padding: 12px 24px;
+    border-radius: 3px;
+    text-align: center;
+    transition: all .3s;
+
+}
+
+.borderTr{
+    border-bottom: 1px solid grey
+}
+
+.borderTrTop{
+    border-top: 1px solid grey
+}
+
+.input_contact{
+
+    height: 40px;
+}
+
+
+.img_recursos{
+
+    width: 120px;
+}
+
+a:hover{
+    color: #ffbc44 !important;
+
+}
+
+.botonWeb a:hover{
+    color: white !important;
+}
+
+#logos-top{
+
+    width: 100%;
+    text-align: right;
+
+}
+
+.logosTopRight{
+
+    width: 200px;
+}
+
+.imgLogoJunta{
+    height: 65px;
+}
+
+
+
+/* - - - - - - - - - - - - - - - ENCUESTA - - - - - - - - - - - - - - - */
+html, body {
+
+}
+
+.bodyEncuesta{
+    overflow: hidden;
+    height: 95%;
+    background-color: #e38b00;
+}
+
+.agruparContenido{
+    min-width:100%;
+}
+
+.formularioEncuesta{
+    
+    position: relative;
+    width: 100%;
+}
+
+.contenedorEncuesta{
+    
+    text-align: center;
+    width: 100%;
+    background-color: #e38b00;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);    
+    -webkit-transform: translate(-50%, 0);
+}
+
+.encPortada{
+    min-width: 100%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.bannerEncuesta{
+    float: left;
+    width: 230px;
+}
+
+.encDivisor {
+    display:none;
+    border-bottom: 2px solid white;
+}
+
+
+.bannerEncuesta img{
+
+}
+
+.encAccion{
+    color: white !important;
+    float: right;
+}
+
+
+
+
+.encAccion p{
+    text-align: left;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.contenedorPregunta{
+    height: 100vh;
+    min-height: 350px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: #e38b00;
+    display:none;
+    text-align: center;
+}
+
+
+/* - - - - - - - - - - Preguntas Si/No - - - - - - - - - - */
+.preguntaSiNo input[type="radio"]{
+    width: 83px;
+    height: 40px;
+    border-radius: 2px;
+    border: 0px;
+    background-color: white;
+    -webkit-appearance: none; /*to disable the default appearance of radio button*/
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+.preguntaSiNo{
+    height: 30px;
+}
+
+.preguntaSiNo input[type="radio"]:checked { /*no need, if you don't disable default appearance*/
+    background-color: #ffbc44;
+
+}
+
+.preguntaSiNo input[type="radio"]:checked ~ span:first-of-type {
+    color: black;
+}
+
+.preguntaSiNo label{
+    max-width: 83px;
+    max-height: 28px;
+    margin-right: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.preguntaSiNo label span:first-of-type {
+    position: relative;
+    left: 0px;
+    top: -40px;
+    font-size: 15px;
+}
+
+
+/* - - - - - - - - - - Pregunta seleccion multiple - - - - - - - - - - */
+.preguntaMultiple .btn{
+    color:black;
+    background-color: white;
+    border-color: lightgray;
+    border-radius: 0px;
+}
+
+
+.preguntaMultiple input[type="radio"]{
+  width: 60%;
+  height: 40px;
+  border-radius: 2px;
+  border: 1px solid white;
+  background-color: white;
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.btn-SelectOption:hover{
+    background-color: #ffbc44 !important;
+    
+}
+.btn-SelectOption:active{
+    background-color: #ffbc44 !important;
+    
+}
+.btn-SelectOption:checked{
+    background-color: #ffbc44 !important;
+    
+}
+.btn-SelectOption:selected{
+    background-color: #ffbc44 !important;
+    
+}
+
+.btn-outline-success{
+    background-color: blue !important;
+}
+
+.preguntaMultiple input[type="radio"]:checked ~ span:first-of-type {
+  color: black;
+}
+
+
+.preguntaMultiple label span:first-of-type {
+  position: relative;
+  left: 0px;
+  top: -40px;
+  font-size: 15px;
+}
+
+.preguntaMultiple label span {
+  position: relative;
+  top: -12px;
+}
+
+/* - - - - - - - - - - Pregunta Otros - - - - - - - - - - */
+.preguntaOtros{
+    margin-top: 15px;
+}
+
+
+.tituloPregunta{
+    color: white;
+    margin:auto;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.contenidoPregunta{
+    margin: auto;
+    text-align: center;
+}
+
+.contenedorBotones{
+    margin-top: 40px;
+}
+
+.btnEncuesta {
+    background-color: #ffbc44;
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 40px;
+    width: 120px;
+    line-height: 20px;
+    list-style: none;
+    margin: 0;
+    outline: none;
+    padding: 10px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: color 100ms;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.btnEncuesta:hover,
+.btnEncuesta:focus {
+    background-color: #fcae1c;
+}
+
+.encFinal{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* diseño pagina */
+
+.top-bar {
+    padding: 0.5rem 0;
+    background: #eee;
+}
+
+.menu-fixed {
+    position:fixed !important;
+    z-index:1000;
+    top:0;
+    width:100%;
+    box-shadow:0px 4px 3px rgba(0,0,0,.5);
+}
+
+.fixed-top{
+    top: 40px !important;
+}
+
+.containerFoto{
+    margin-top: 56px;
+    width: 100%;
+    text-align: center;
+}
+
+.containerFoto img{
+    height: 700px;
+}
+
+.separadorWeb{
+
+    height: 2px;
+    background-color: #e38b00;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.margin-top-page{
+
+    margin-top: 90px;
+}
+
+footer{
+
+    background-color:#333333;
+    padding: 40px;
+}
+
+main{
+    margin-bottom: 20px;
+}
+
+/* Código QR */
+.containerQr{
+    text-align: center;
+    margin: 10%;
+    margin-top: 15%;
+}
+
+.colorGreen{
+    color: #00b140;
+}
+
+.divJunta{
+    
+    margin-top: 20px;
+    background-color: white;
+    padding: 20px;
+}
+
+.cardRutas_head{
+
+    height: 60px;
+    padding-top: 10px;
+}
+
+.divImgRutas{
+    height: 200px;
+}
+
+.textRutas{
+
+    height: 80px;
+    
+}
+
+
+#fotosPueblo img{
+    cursor: pointer;
+}
+
+/* Modal fotos pueblo 
+(ventana que se abre cuando en la web le damos a la imagen)*/
+.modalFotos{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    
+    display: flex;
+    justify-content: center; /* Alinear horizontal */
+    align-items: center; /* Alinear vertical */
+}
+
+.modalFotos img{
+    width: 95%; 
+    max-width: 875px;
+}
+
+.modalFotos .btn-cerrar{
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    top: 20px;
+    right: 20px;
+    background: #0089E0;
+    cursor: pointer;
+    color:#fff;
+    
+    display: flex;
+    justify-content: center; /* Alinear horizontal */
+    align-items: center; /* Alinear vertical */
+}
+
+.modalFotos .btn-cerrar i{
+    font-size: 1rem;
+    line-height: 50px;
+}
+
+/* Políticas */
+.privacidad{
+    font-size: 18px;
+}
+
+.privacidad a {
+    color: #e38b00; 
+}
+
+.privacidad a:hover {
+    text-decoration: underline;
+}
+
+.privacidad li{
+    display: block;
+}
+
+.contenidoPrivacidad {
+    font: OpenSansRegular;
+}
+
+.contenidoPrivacidad ol li ol {
+    padding-left: 0px;
+}
+
+.contenidoPrivacidad li{
+    margin-top: 22px;
+}
+
+.contenidoPrivacidad ul li{
+    margin-top: 0px;
+}
+
+.tituloPrivacidad{
+    font-size: 22px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+.subtituloPrivacidad{
+    color: #666666;
+    background-color: #EFEFEF;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.indicePrivacidad{
+    font-size: 16px;
+    float: right;
+    border-right: dotted blue 0.4px;
+    padding-right: 10px;
+}
+
+.tablaCookies{
+    background-color: #6c97bf;
+}
+
+@media (max-height: 600px) {
+
+    .contenedorEncuesta{
+
+        margin-top: 20px;
+        text-align: center;
+        width: 100%;
+        background-color: #e38b00;
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        -ms-transform: none;
+        -webkit-transform: none;
+        height: 100%;
+    }
+    
+    .bodyEncuesta{
+        overflow: auto;
+    }
+}
+
+/* RUTAS */
+
+#map {
+    height: 600px;
+
+}
+
+
+@media (max-width: 1400px){
+
+    .cardRutas_head{
+
+        height: 70px;
+    }
+
+    .textRutas{
+
+        height: 100px;
+
+    }
+}
+
+@media (max-width: 1200px){
+
+
+    .divImgRutas{
+        height: 150px;
+    }
+    
+    .textRutas{
+
+        height: 120px;
+
+    }
+
+}
+
+@media (max-width: 1200px){
+    
+    .cardRutas_head{
+
+        height: 80px;
+        font-size: 16px;
+    }
+
+    .divImgRutas{
+        height: 120px;
+    }
+    
+    .textRutas{
+
+        height: 150px;
+
+    }
+
+    .containerFoto img {
+        height: 500px;
+    }
+
+}
+
+@media (max-width: 770px){
+    
+    .cardRutas_head{
+
+        height: 50px;
+        font-size: 18px;
+    }
+
+    .divImgRutas{
+        height: 200px;
+    }
+    
+    .textRutas{
+
+        height: 80px;
+
+    }
+    
+    .containerFoto img {
+        height: 300px;
+    }
+
+}
+
+@media (max-width: 430px){
+    
+    .containerFoto img {
+        height: 180px;
+    }
+
+}
+
+@media (max-width: 370px){
+    
+    .cardRutas_head{
+
+        font-size: 16px;
+    }
+
+    .divImgRutas{
+        height: 150px;
+    }
+    
+    .textRutas{
+
+        height: 120px;
+
+    }
+
+}
+
+@media (max-width: 270px){
+    
+    .cardRutas_head{
+
+        height: 60px;
+    }
+
+    .divImgRutas{
+        height: 100px;
+    }
+    
+    .textRutas{
+
+        height: 150px;
+
+    }
+
+}
+
+
+
+@media (max-width: 460px) {
+    .top-bar{
+        font-size: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .bannerEncuesta{
+        border-right: 2px solid white;
+    }
+}
+
+@media (max-width: 767px) {
+    .encDivisor {
+        display:block !important;
+        width: 50% !important;
+    }
+    .encAccion{
+        margin-bottom: 20%;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .logosTopRight{
+
+        width: 100px;
+    }
+}
+
+@media (max-width: 550px) {
+
+    .button{
+        font-size: 10px;
+
+    }
+}
+
+@media (max-width: 400px) {
+
+    .button{
+        font-size: 8px;
+
+    }
+}
