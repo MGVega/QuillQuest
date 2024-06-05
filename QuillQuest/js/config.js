@@ -3,20 +3,20 @@
  */
 
 // --- PRODUCTION --//
-/*var urlAjax='https://www.mirandilla.com/controllers/actionController.php';
- var rootUrl = 'https://www.mirandilla.com/';
- var urlLogin = 'https://www.mirandilla.com/admin';*/
+/*var urlAjax='https://www.QuillQuest.com/controllers/actionController.php';
+ var rootUrl = 'https://www.QuillQuest.com/';
+ var urlLogin = 'https://www.QuillQuest.com/admin';*/
 // -----------------//
 
 //DEVELOP
-/*var urlAjax='https://mirandilla.wilowi.com/controllers/actionController.php';
- var rootUrl = 'https://mirandilla.wilowi.com/';
- var urlLogin = 'https://mirandilla.wilowi.com/admin';*/
+/*var urlAjax='https://QuillQuest.wilowi.com/controllers/actionController.php';
+ var rootUrl = 'https://QuillQuest.wilowi.com/';
+ var urlLogin = 'https://QuillQuest.wilowi.com/admin';*/
 // -----------------//
 
-var urlAjax = 'http://localhost/mirandilla/mirandilla/controllers/actionController.php';
-var rootUrl = 'http://localhost/mirandilla/mirandilla/';
-var urlLogin = 'http://localhost/mirandilla/mirandilla/admin';
+var urlAjax = 'http://localhost/QuillQuest/QuillQuest/controllers/actionController.php';
+var rootUrl = 'http://localhost/QuillQuest/QuillQuest/';
+var urlLogin = 'http://localhost/QuillQuest/QuillQuest/admin';
 
 
 // --- Enviar al servidor

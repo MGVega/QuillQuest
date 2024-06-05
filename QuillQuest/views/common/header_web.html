@@ -2,20 +2,14 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <a href="mailto:ayuntamiento@mirandilla.es" class="colorBlack">
-                    <i class="fa-regular fa-envelope padding-right10"></i>
-                    <span class="d-md-inline-block">ayuntamiento@mirandilla.es</span>
-                </a>
-                <span class="mx-md-2 d-inline-block"></span>
-                <a href="tel:924320647" class="colorBlack">
-                    <i class="fa-solid fa-phone padding-right10"></i>                            
-                    <span class="d-md-inline-block">924 32 06 47</span>
+                <a href="mailto:g.v.mario96@gmail.com" class="colorBlack">
+                    <i class="fa-regular fa-envelope padding-right10 color4"></i>
+                    <span class="d-md-inline-block color4">quillqueststories@gmail.com</span>
                 </a>
                 <div class="float_right">
-                    <a href="https://www.youtube.com/@aytomirandilla5877/featured" class="colorBlack" target="_blank">
-                        <i class="fa-brands fa-youtube padding-right10"></i>
-                        <span class="d-md-inline-block">Youtube</span>
-                    </a>
+                    <img src="../QuillQuest/images/social/ig.png" class="mx-1" style="width: 30px; margin-top: -4px;" onerror="this.onerror=null;this.src='../../QuillQuest/images/social/ig.png';">
+                    <img src="../QuillQuest/images/social/fb.png" class="mx-1" style="width: 30px; margin-top: -4px;" onerror="this.onerror=null;this.src='../../QuillQuest/images/social/fb.png';">
+                    <img src="../QuillQuest/images/social/x.png" class="mx-1" style="width: 30px; margin-top: -4px;" onerror="this.onerror=null;this.src='../../QuillQuest/images/social/x.png';">
                 </div>
             </div>
         </div>
@@ -24,14 +18,13 @@
 
 [s/if $show_menu/s]
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top menuPrincipalPueblo" id_menu="1">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light menu-fixed menuPrincipalPueblo" style="background-color: #121212 !important; border-bottom: solid 1px white;" id_menu="1">
 
         <a class="navbar-brand padding-left40" href="[s/$url/s]">
-            <img src="[s/$urlExtra/s]images/escudoMirandilla.png" width="30" height="30" class="d-inline-block align-top" alt="logo ayuntamiento de mirandilla">
-            Ayuntamiento de Mirandilla
+            <img src="[s/$urlExtra/s]images/logo/horizont_claro_sin_fondo.png" height="50" class="d-inline-block align-top" alt="logo">
         </a>
         
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-dark navbar-toggler border border-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -41,10 +34,10 @@
                     <a class="nav-link" href="[s/$url/s]">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="[s/$urlExtra/s]ayuntamiento">Ayuntamiento</a>
+                    <a class="nav-link" href="[s/$urlExtra/s]descubre">Descubre</a>
                 </li>
 
-                <li class="nav-item dropdown">
+                <!--<li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Localidad
                     </a>
@@ -56,19 +49,15 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="[s/$urlExtra/s]ubicacion">Ubicación</a>
                     </div>
-                </li>
-                
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Tablón digital
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="[s/$urlExtra/s]enlaces">Enlaces de interés</a>
-                    </div>
-                </li>
-                
+                </li>-->
                 <li class="nav-item">
-                    <a class="nav-link" href="[s/$urlExtra/s]contacto">Contacto</a>
+                    <a class="nav-link" href="[s/$urlExtra/s]admin">Iniciar sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="[s/$urlExtra/s]panel">Perfil: <?php echo htmlspecialchars($_SESSION['name_user']); ?> [s/$testt/s][s/$name_user/s]</a>
+                </li>
+                <li class="nav-item">
+                    <img src="[s/$fotoPerfil/s]">
                 </li>
 
             </ul>

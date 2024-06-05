@@ -1,7 +1,7 @@
 <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
     <div class="sidebar-brand d-none d-md-flex">
 
-        Mirandilla
+        QuillQuest
     </div>
     <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
         <li class="nav-item">
@@ -13,71 +13,30 @@
         </li>
         <li class="nav-title">OPCIONES</li>
         <li class="nav-item">
-            <a class="nav-link" href="#" onclick="verQR();">
+            <a class="nav-link" href="#" onclick="crearHistoria();">
                 <svg class="nav-icon">
-                <use xlink:href="lib/coreui/vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
-                </svg> Ver QR
-            </a>
-        </li>
-
-        <li class="nav-title">ENCUESTAS</li>
-        <li class="nav-group">
-            <a class="nav-link nav-group-toggle" href="#">
-                <svg class="nav-icon">
-                <use xlink:href="lib/coreui/vendors/@coreui/icons/svg/free.svg#cil-puzzle"></use>
-                </svg> Preguntas
-            </a>
-            <ul class="nav-group-items">
-                <li class="nav-item"><a class="nav-link" href="#" onclick="preguntaRequest('create',0);"><span class="nav-icon"></span> Crear</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="listadoPreguntas();"><span class="nav-icon"></span> Listado</a></li>
-            </ul>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="#" onclick="encuestasRealizadas();">
-                <svg class="nav-icon">
-                <use xlink:href="lib/coreui/vendors/@coreui/icons/svg/free.svg#cil-chart-pie"></use>
-                </svg> Realizadas
+                <use xlink:href="lib/coreui/vendors/@coreui/icons/svg/free.svg#cil-book"></use>
+                </svg> Crear historia
             </a>
         </li>
         
-         <li class="nav-divider"></li>
-        <li class="nav-title">RUTAS</li>
+        <li class="nav-divider"></li>
+        <li class="nav-title">MIS HISTORIAS</li>
         <li class="nav-item">
-            <a class="nav-link" href="#" onclick="crearRuta();">
+            <a class="nav-link" href="#" onclick="listado();">
                 <svg class="nav-icon">
-                <use xlink:href="lib/coreui/vendors/@coreui/icons/svg/free.svg#cil-walk"></use>
-                </svg> Crear ruta
+                <use xlink:href="lib/coreui/vendors/@coreui/icons/svg/free.svg#cil-library"></use>
+                </svg> Listado historias
             </a>
         </li>
         
         <li class="nav-item">
-            <a class="nav-link" href="#" onclick="listadoRutas();">
+            <a class="nav-link" href="#" onclick="">
                 <svg class="nav-icon">
                 <use xlink:href="lib/coreui/vendors/@coreui/icons/svg/free.svg#cil-list"></use>
-                </svg> Listado
+                </svg> Balance
             </a>
         </li>
-
-        <li class="nav-divider"></li>
-        <li class="nav-title">INFORMES</li>
-        <li class="nav-item">
-            <a class="nav-link" href="#" onclick="graficos();">
-                <svg class="nav-icon">
-                <use xlink:href="lib/coreui/vendors/@coreui/icons/svg/free.svg#cil-chart-pie"></use>
-                </svg> Gráficos
-            </a>
-        </li>
-        
-        <li class="nav-item">
-            <a class="nav-link" href="#" onclick="documentos();">
-                <svg class="nav-icon">
-                <use xlink:href="lib/coreui/vendors/@coreui/icons/svg/free.svg#cil-description"></use>
-                </svg> Documentos
-            </a>
-        </li>
-        
-       
 
     </ul>
     <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>

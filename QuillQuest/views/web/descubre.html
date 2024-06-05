@@ -1,0 +1,55 @@
+<main>
+
+    <section>
+
+        <div class="container text-16 mb-5">
+
+            <h3 class="color3 margin-top-page">Descubre historias</h3>
+
+            <div class="separadorWeb"></div>
+            
+            <div class="accordion">
+                <div class="accordion-item" style="background-color:#121212;">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button class="accordion-button color3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="background-color:#121212; color: white;">
+                        Filtrar
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <!--<div class="row ml-1 mb-3">
+                            Que incluya:
+                            <div class="col-md-2 col-sm-4">
+                                <select class="form-select" aria-label="Default select example" id="filtroIncluir">
+                                    <option value="1" selected>Cualquiera</option>
+                                    <option value="2">Todos</option>
+                                </select>
+                            </div>
+                        </div>-->
+                        <div class="row ml-1">
+                            [s/foreach from=$generos item=genero/s]
+                            <div class="col-md-2 col-sm-6">
+                                <input class="form-check-input" type="checkbox" value="" id="genero_[s/$genero->genero_id/s]">
+                                <label class="form-check-label" for="genero_[s/$genero->genero_id/s]">
+                                  [s/$genero->nombre_genero/s]
+                                </label>
+                            </div>
+                            [s//foreach/s]
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4 col-sm-12">
+                              <input class="form-control mr-sm-2" type="search" placeholder="Búsqueda por título" aria-label="Search">
+                            </div>
+                            <div class="col-2">
+                              <button class="btn background_color3 my-2 my-sm-0 text-white" type="submit">Buscar</button>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>

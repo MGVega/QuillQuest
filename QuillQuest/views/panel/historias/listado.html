@@ -1,0 +1,131 @@
+<main id="wrapper" class="active">
+    <h3 class="margin-bottom20">Listado de mis historias</h3>
+    <div id="container" class="margin-bottom40 table-responsive-md">
+        <table id="tablaRutas" class="datatable display">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Sinopsis</th>
+                    <th>Género</th>
+                    <th>Portada</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <div class="table-content">
+                    [s/foreach from=$historias item=historia/s]
+                    <tr id="h_[s/$historia->historia_id/s]">
+                        <td>[s/$historia->titulo/s]</td>
+                        <td>[s/$historia->sinopsis/s]</td>
+                        <td>[s/foreach from=$generos item=genero/s][s/if $genero->genero_id == $historia->historia_genero_id/s][s/$genero->nombre_genero/s][s//if/s][s//foreach/s]</td>
+                        <td>
+                            [s/if $historia->portada != ''/s]
+                            <a href="[s/$historia->portada/s]" target="_blank">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            [s//if/s]
+                        </td>
+
+                        <td class="text-center">
+
+                            <div class="row">
+                                <div class="col-md-4 text-success">
+                                    <i class="fas fa-plus cursor_pointer" onclick="crearPaginas([s/$historia->historia_id/s]);"></i>
+                                </div>
+                                <div class="col-md-4 color1">
+                                    <i class="fas fa-pencil cursor_pointer" onclick="modalModifMore([s/$historia->historia_id/s]);"></i>
+                                </div>
+                                <div class="col-md-4 colorError">
+                                    <i class="fas fa-trash cursor_pointer" onclick="modalDeleteMore([s/$historia->historia_id/s]);"></i>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                    [s//foreach/s]
+                </div>
+            </tbody>
+        </table>
+
+        [s/foreach from=$historias item=historia/s]
+        
+        <div id="modal_modif_[s/$historia->historia_id/s]" class="hidden-print modal fade">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+
+                        <div class="row text-center mb-3">
+                            <h2>Modificar historia</h2>
+                        </div>
+
+                        <div class="row">
+                            <form id="historiaForm[s/$historia->historia_id/s]" class="text-center d-flex flex-column align-items-center">
+                                <div class="form-group col-md-6 mb-3">
+                                  <label for="tituloHistoria[s/$historia->historia_id/s]">Título de la historia.</label>
+                                  <input maxlength="100" name="tituloHistoria[s/$historia->historia_id/s]" type="text" class="form-control" id="tituloHistoria[s/$historia->historia_id/s]" placeholder="Un título que conceptualice tu historia" value="[s/$historia->titulo/s]">
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+                                  <label for="sinopsisHistoria[s/$historia->historia_id/s]">Sinopsis</label>
+                                  <textarea maxlength="500" name="sipnopsisHistoria[s/$historia->historia_id/s]" class="form-control" id="sinopsisHistoria[s/$historia->historia_id/s]" rows="3" placeholder="Escribe sobre qué va la historia. ¡No la destripes!">[s/$historia->sinopsis/s]</textarea>
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+                                  <label for="generoHistoria[s/$historia->historia_id/s]">Género</label>
+                                  <select class="form-select" id="generoHistoria[s/$historia->historia_id/s]" name="generoHistoria[s/$historia->historia_id/s]">
+                                      [s/foreach from=$generos item=genero/s]
+                                      <option value="[s/$genero->genero_id/s]" [s/if $genero->genero_id == $historia->historia_genero_id/s]selected[s//if/s]>[s/$genero->nombre_genero/s]</option>
+                                      [s//foreach/s]
+                                  </select>
+                                </div>
+                                <div class="form-group col-md-6 mb-2">
+                                  <label for="portadaHistoria[s/$historia->historia_id/s]">Portada</label><br>
+                                  <input type="file" name="portadaHistoria[s/$historia->historia_id/s]" id="portadaHistoria[s/$historia->historia_id/s]">
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+                                    [s/if $historia->portada != ''/s]
+                                    <a href="[s/$historia->portada/s]" target="_blank">
+                                        Ver portada actual <i class="fas fa-image"></i>
+                                    </a>
+                                    [s//if/s]
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn backgroundGrey" data-bs-dismiss="modal" onclick="closeModal('modal_modif_[s/$historia->historia_id/s]');">Cancelar</button>
+                        <button type="button" class="btn background_color1 colorWhite" onclick="modificarHistoria([s/$historia->historia_id/s])">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="modal_delete_[s/$historia->historia_id/s]" class="hidden-print modal fade">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+
+                        <div class="text-20">
+                            <strong>Eliminar historia: [s/$historia->titulo/s]</strong>
+                        </div>
+
+                        <div class="row margin-top20">
+                            <div class="col-md-12">
+                                <p>¿Deseas borrar esta historia? (Los cambios no podrán deshacerse).</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn backgroundGrey" data-bs-dismiss="modal" onclick="closeModal('modal_delete_[s/$historia->historia_id/s]');">Cancelar</button>
+                        <button type="button" class="btn background_error colorWhite" onclick="borrarHistoria([s/$historia->historia_id/s]);">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        [s//foreach/s]
+        
+    </div>
+</main>

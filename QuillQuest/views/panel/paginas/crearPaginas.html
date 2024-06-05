@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row text-center mb-3">
+        <h2>Panel de creación de páginas</h2>
+    </div>
+    <div class="row">
+        <div class="accordion mb-3" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Portada
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                      <img src="[s/$historia->portada/s]" alt="portada de la historia"/>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6 mb-3">
+            <h2>[s/$historia->titulo/s]</h2><br>
+            <span>Género: <b>[s/$genero/s]</b></span>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+          <label for="sinopsisHistoria">Sinopsis</label>
+          <textarea maxlength="500" name="sipnopsisHistoria" class="form-control" id="sinopsisHistoria" rows="3" disabled>[s/$historia->sinopsis/s]</textarea>
+        </div>
+    </div>
+    <div class="form-group col-md-12 d-flex justify-content-evenly mb-5">
+        <button class="btn btn-primary" id="comenzar" onclick="addPage();">Comenzar <i class="fa fa-arrow-down"></i></button>
+    </div>
+    <div class="row d-flex justify-content-center">
+        
+        <hr id="separadorBotones">
+        
+                            <em class="mb-3">*Si no se añaden opciones, será la página final de la historia.</em>
+        <div class="form-group col-md-6 d-flex justify-content-evenly mb-5">
+            <button class="btn btn-success text-white" onclick="savePages([s/$historia->historia_id/s]);">Guardar <i class="fa fa-save"></i></button>
+        </div>
+    </div>
+</div>

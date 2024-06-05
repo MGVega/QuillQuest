@@ -2,9 +2,9 @@
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
-# MIRANDILLA
+# QUILLQUEST
 
-Proyecto para Mirandilla de Pueblos Inteligentes
+Proyecto para DAW. App QuillQuest: Historias interactivas
 
 # .htaccess
 
@@ -33,7 +33,7 @@ NOTA: Si se modifican estos ficheros en local, no subir al repositorio, quitarlo
 
 3. Crear las carpetas dataDB, dataLogs y tests si no están creadas al mismo nivel que el proyecto.
 
-4. Crear la carpeta TmpSmarty dentro del proyecto mirandilla si no está creada.
+4. Crear la carpeta TmpSmarty dentro del proyecto QuillQuest si no está creada.
 
 # Configurar base de datos
 
@@ -86,8 +86,8 @@ En el caso de linux
 Se necesitan dar privilegios a estos directorios:
 
 - dataLogs/
-- mirandilla/TmpSmarty
-- mirandilla/images/
+- QuillQuest/TmpSmarty
+- QuillQuest/images/
 - tests/
 
 

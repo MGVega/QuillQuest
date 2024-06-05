@@ -75,6 +75,14 @@ final class webController extends controller{
             
         }
         
+        if ($this->page == 'descubre') {
+            
+            $model_generos = new generosModel();
+            $result_generos = $model_generos->select();
+            $this->template->assign("generos", $result_generos);
+            
+        }
+        
         if ($this->page == 'rutas') {
             // Al entrar en la página de rutas, cargamos la base de datos con las rutas            
             $modelRutas = new rutasModel();
@@ -231,6 +239,10 @@ final class webController extends controller{
                 $resultado = $this->login($params);
                 break;
 
+            case 'leerHistoria':
+                $resultado = $this->leerHistoria($params);
+                break;
+
             case 'recoveryPassword':
                 $resultado = $this->recoverPassword($params);
                 break;
@@ -285,13 +297,13 @@ final class webController extends controller{
 	    // --- If is a correct password or master password and if the user is active and not blocked.
 	    if ( password_verify($password, $result_login[0]->password) && $result_login[0]->active == 1) {
 
-		$this->control_request = true;		
+		$this->control_request = true;
 		session_start();
 		$_SESSION['name_user'] = $result_login[0]->name;
 		$_SESSION['user_id'] = $result_login[0]->user_id;
 		$_SESSION['role_user'] = $result_login[0]->role;
 		$_SESSION['time'] = time();
-
+                
 		//echo print_r($_SESSION);
 		$send = 'loginTrue';
 		$user->setDate_last_login($today->format('Y-m-d H:i:s'));
@@ -316,25 +328,7 @@ final class webController extends controller{
 	return $this->getJSONEncode($send);
     }
     
-    private function recoverPassword($params){
-	
-	
-	
-	
-    }
-    
-    private function enviarCorreoContacto(){
-        
-        $addresses = array();
-        array_push($addresses,"sandra@wilowi.com");
-        $subject = "Wilowi";
-        
-        $body = "Hola";
-        
-        $respuesta = sendMail($addresses, utf8_decode($subject), utf8_decode($body));
-        
-        return $respuesta;
-    }
+    private function recoverPassword($params){}
     
     private function googleCaptcha($params) {
 
@@ -371,143 +365,16 @@ final class webController extends controller{
         return $respuesta;
     }
     
-    private function guardarEncuesta($params) {
-
-        $encuestas = new encuestasModel();
-        $encuestas->setFecha_encuesta($this->today->format('Y-m-d H:i:s'));
-        $result_id = $encuestas->add();
-
-        if ($result_id) {
-            $model = new encuestasRespuestasModel();
-            $model->setEncuesta_id($result_id);
-
-            foreach ($params->preguntas as $pregunta) {
-                
-                // resetear los valores al principio porque sino en nada que coja uno el resto igual
-                $model->setOpciones_select(0);
-                $model->setOpciones_multiple(0);
-                $model->setSi_no(0);
-                $model->setNumero_libre(0);
-                $model->setOpciones(0);
-                $model->setTexto_libre(null);
-                $model->setOtros(null);
-
-                if (!empty($pregunta)) {
-                    $model->setPregunta_id($pregunta->pregunta_id);
-                }
-                switch (intval($pregunta->tipo_pregunta)) {
-                    case 1: //Seleccion
-                        
-                        $model->setOpciones_select(1);
-
-                        $modelSelect = new encuestasRespuestasSelectModel();
-                        $modelSelect->setEncuesta_id($result_id);
-                        $modelSelect->setPregunta_id($pregunta->pregunta_id);
-                        
-                        foreach ($pregunta->select as $opciones) {
-
-                            $modelSelect->setSelect_id($opciones->select_id);
-                            $modelSelect->setValue_select($opciones->value);
-                            $modelSelect->add();
-                        }
-
-                        break;
-                        
-                    case 2: //Opciones simple
-                        $model->setOpciones($pregunta->value);
-                        break;
-                    case 3: //Opciones multiples
-
-                        $model->setOpciones_multiple(1);
-                        
-                        $modelOption = new encuestasRespuestasMultipleModel();
-                        $modelOption->setEncuesta_id($result_id);
-                        $modelOption->setPregunta_id($pregunta->pregunta_id);
-                        
-                        foreach ($pregunta->options as $opciones) {
-
-                            $modelOption->setOpcion_id($opciones);
-                            $modelOption->add();
-                        }
-                        
-                        break;
-                    case 4: //Si/No
-                        $model->setSi_no($pregunta->value);
-                        break;
-                    case 5: //Texto libre
-                        $model->setTexto_libre($pregunta->value);
-                        break;
-                    case 6: //Numero libre
-                        $model->setNumero_libre($pregunta->value);
-                        break;
-                }
-                if (!empty($pregunta->respuesta_otros)) {
-                    $model->setOtros($pregunta->respuesta_otros);
-                }
-
-                $model->add();
-
-            }
-        } else {
-            $mensaje = "Ha habido un error y no se han podido guardar los datos correctamente. Disculpe las molestias.";
-            return $this->getJSONEncode($mensaje);
-        }
-        $mensaje = "¡Muchas gracias!";
-        return $this->getJSONEncode($mensaje);
-    }
-    
-    private function obtenerProvinciasComunidades($params){
+    private function leerHistoria($params) {
         
-        $id = intval($params->country_id);
+        echo print_r($params);
+        $model_generos = new generosModel();
+        $result_generos = $model_generos->select();
+        $this->template->assign("generos", $result_generos);
         
-        $where = "country_id=$id ORDER BY name";
-        
-        $provincias = new statesModel();
-        $result_provincias = $provincias->select($where,'','name,state_id,country_id,comunidad_id');
-        $comunidades = new comunidadesModel();
-        $result_comunidades = $comunidades->select($where,'','name,comunidad_id,country_id');
-        
-        $objetoTotal = new stdClass();
-        $objetoTotal->provincias = $result_provincias;
-        $objetoTotal->comunidades = $result_comunidades;
-        
-        return $this->getJSONEncode(json_encode($objetoTotal));
-    }
-    
-    private function obtenerProvincias($params){
-        
-        $id = intval($params->comunidad_id);
-        
-        $where = "comunidad_id=$id ORDER BY name";
-        
-        $provincias = new statesModel();
-        $result_provincias = $provincias->select($where,'','name,state_id,country_id,comunidad_id');
-        
-        $objetoTotal = new stdClass();
-        $objetoTotal->provincias = $result_provincias;
-        
-        return $this->getJSONEncode(json_encode($objetoTotal));
-    }
-    
-    
-
-
-    
-    private function obtenerCiudades($params){
-        
-        $id = intval($params->state_id);
-        
-        $where = "state_id=$id ORDER BY name";
-
-        $ciudades = new citiesModel();
-        $result_ciudades = $ciudades->select($where,'','name,city_id,country_id,state_id,comunidad_id');
-        
-        $objetoTotal = new stdClass();
-        $objetoTotal->ciudades = $result_ciudades;
-        
-        return $this->getJSONEncode(json_encode($objetoTotal));
+        $send = $this->template->fetch('web/leerHistoria.html');
+        return $this->getJSONEncode($send);
         
     }
     
-    
-}// guardarEncuesta
+}

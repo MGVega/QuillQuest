@@ -6,7 +6,35 @@
 
 body{
     height: 100%;
+    background-color: #121212 !important;
 }
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+    color: white; 
+}
+
+
+html a,body a{
+    color: white !important; 
+}
+
+.bordeHistoria{
+    border: 1px solid #f1f1f1;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #202020;
+}
+
+.portadaHistoria{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+
+    .content-page {
+        display: none;
+    }
 
 .form-control-dark {
     border-color: var(--bs-gray);
@@ -610,7 +638,12 @@ html, body {
 
 .top-bar {
     padding: 0.5rem 0;
-    background: #eee;
+    background: #121212;
+    color: white !important;
+}
+
+.top-bar a{
+    color: white !important;
 }
 
 .menu-fixed {
@@ -626,13 +659,32 @@ html, body {
 }
 
 .containerFoto{
-    margin-top: 56px;
+    margin-top: 49px;
     width: 100%;
     text-align: center;
 }
 
+.carroInicio{
+    width: 60%;
+}
+
 .containerFoto img{
-    height: 700px;
+    max-height: 500px;
+}
+
+#btn-back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  z-index: 1;
+}
+
+
+@media (max-width: 575.98px) {
+    .carroInicio{
+        width: 90%;
+    }
 }
 
 .separadorWeb{

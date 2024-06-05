@@ -27,7 +27,7 @@ define('_LOG', 'var/logs/');
 define('_EXTRA', 'lib/');
 define('_DOCUMENTS', 'documents/');
 define('_DB','/../../dataDB/');
-define('_TITLE','Mirandilla - Pueblos Inteligentes');
+define('_TITLE','QuillQuest - Historias interactivas');
 define('_JSP', 'panel.js?t='.$no_cache);
 define('_JSW', 'web.js?t='.$no_cache);
 define('_JSR', 'rutas.js?t='.$no_cache);

@@ -49,15 +49,15 @@ Thumbs.db
 *.wmv
 
 /nbproject/
-/mirandilla/nbproject/
-/mirandilla/vendor/
-/mirandilla/TmpSmarty/
-/mirandilla/composer.lock
-/mirandilla/config.php
-/mirandilla/js/config.js
+/QuillQuest/nbproject/
+/QuillQuest/vendor/
+/QuillQuest/TmpSmarty/
+/QuillQuest/composer.lock
+/QuillQuest/config.php
+/QuillQuest/js/config.js
 /tests/
 /dataLogs/
 /dataDB/
-/mirandilla/js/config.js
-/mirandilla/.htaccess
-/mirandilla/images/qr/encuestaQr.png
+/QuillQuest/js/config.js
+/QuillQuest/.htaccess
+/QuillQuest/images/qr/encuestaQr.png

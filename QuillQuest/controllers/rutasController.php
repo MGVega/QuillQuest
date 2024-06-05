@@ -53,20 +53,42 @@ final class rutasController extends controller{
         
         $extra = "../";
         $show_menu = true;
-
-        $this->printHeaderHTML($extra);        
-
+        $this->printHeaderHTML($extra);
         $this->template->assign("reCaptcha", _KEY_CAPTCHA);
         $this->template->assign("urlEnvironment", _URL_ENVIRONMENT);
 
-        $modelRutas = new rutasModel();
-        $where = "ruta_id=$this->ruta_id";
-        $result_modelRutas = $modelRutas->select($where);
+        // - - - - - - - - - - - - - -
         
-        $this->template->assign("ruta", $result_modelRutas[0]);
+        
+        
+        
+        $modelHistorias = new historiasModel();
+        $where = "historia_id=$this->ruta_id";
+        $result_modelHistorias = $modelHistorias->select($where, '', '*', ' LEFT JOIN wi_generos ON(wi_historias.historia_genero_id=wi_generos.genero_id)');
+        
+        $modelPaginas = new paginasModel();
+        $where_pag = "historia_id=$this->ruta_id ORDER BY pagina_id";
+        $result_modelPaginas = $modelPaginas->select($where_pag);
+        
+        $modelElecciones = new eleccionesModel();
+        $where_ele = "historia_id=$this->ruta_id";
+        $result_modelElecciones = $modelElecciones->select($where_ele);
+        
+        /*echo print_r($result_modelHistorias[0]);
+        echo print_r($result_modelPaginas);
+        echo print_r($result_modelElecciones);*/
+        
+        $this->template->assign("historia", $result_modelHistorias[0]);
+        $this->template->assign("paginas", $result_modelPaginas);
+        $this->template->assign("elecciones", $result_modelElecciones);
 
         $content = $this->template->fetch("web/rutas/rutaSeleccionada.html");
 	
+        
+        
+        
+        // - - - - - - - - - - - - - -
+        
 	// header
 	$this->chargeHeader($extra, $show_menu);
 	
@@ -74,7 +96,7 @@ final class rutasController extends controller{
 	echo $content;
 	
 	// footer
-        $this->chargeFooter($extra, $show_menu);
+        /*$this->chargeFooter($extra, $show_menu);*/
 
         $this->printHeaderPos();
         

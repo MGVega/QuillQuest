@@ -84,6 +84,14 @@ function autoload($class_name) {
         include_once dirname(__FILE__) . '/models/rutasPointsModel.php';
     }elseif ($class_name == 'rutasLatLonModel') {
         include_once dirname(__FILE__) . '/models/rutasLatLonModel.php';
+    }elseif ($class_name == 'generosModel') {
+        include_once dirname(__FILE__) . '/models/generosModel.php';
+    }elseif ($class_name == 'historiasModel') {
+        include_once dirname(__FILE__) . '/models/historiasModel.php';
+    }elseif ($class_name == 'paginasModel') {
+        include_once dirname(__FILE__) . '/models/paginasModel.php';
+    }elseif ($class_name == 'eleccionesModel') {
+        include_once dirname(__FILE__) . '/models/eleccionesModel.php';
     }
     
 }

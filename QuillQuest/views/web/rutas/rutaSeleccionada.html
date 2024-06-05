@@ -1,81 +1,87 @@
 <main>
-
     <section>
-
         <div class="container text-16">
 
-            <input type="hidden" id="ruta_id" value="[s/$ruta->ruta_id/s]">
-                    <h3 class="color3 margin-top-page">[s/$ruta->titulo/s]</h3>
-
+            <input type="hidden" id="historia_id" value="[s/$historia->historia_id/s]">
+            
+            <h3 class="color4 margin-top-page">[s/$historia->titulo/s]</h3>
             <div class="separadorWeb"></div>
-
-
-            <div class="row">
-                <div class="col-md-8">
-                    <div id="map">
-
-                    </div>
-
-
-                </div>
-
-                <div class="col-md-4">
-
-                    <div id="rutaSeleccionada">
-                        <div class="row text_center justify-content-center margin-top20">
-                            <div class="col-md-6">
-                                
-                                [s/if $ruta->tipo_ruta==1/s]
-                                <i class="fa-solid fa-person-hiking text-25 color3"></i>
-                                <br>Senderismo
-                                [s/elseif $ruta->tipo_ruta==2/s]
-                                <i class="fa-solid fa-person-biking text-25 color3"></i>
-                                <br>Bicicleta
-                                [s//if/s]
-                                
-                            </div>
-                            <div class="col-md-6">
-                                <h5 class="color3">Dificultad</h5>
-                                [s/if $ruta->dificultad==1/s]Fácil[s/elseif $ruta->dificultad==2/s]Moderada[s/elseif $ruta->dificultad==3/s]Difícil[s//if/s]
-                            </div>
-                            
-                        </div>
-                        <hr>
-                        <div class="row text_center">
-                            
-                            <div class="col-md-6 text-25 color3">
-                                [s/$ruta->km/s] km.
-                            </div>
-                            
-                            <div class="col-md-6">
-                                [s/if $ruta->link_descarga!=''/s]
-                                <div id="archivoRuta">
-                                    <a id="rutaFile" href="../[s/$ruta->link_descarga/s]" download=""><i class="fa-solid fa-file-arrow-down fa-2xl color3" title="Descargar gpx"></i></a>
-                                </div>
-                                [s//if/s]
-                            </div>
-                            
-                        </div>
-                        <hr>
-                        <div class="row justify-content-center text_center">
-                            <div class="col-12">
-                                <h5 class="color3 ">Descripcion</h5>[s/$ruta->descripcion/s]
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="col-md-12 text_center botonWeb">
-                            <a href="../rutas" class="btn background_color4"><i class="fa-solid fa-caret-left"></i> Volver</a>
+            <span class="color4">Género: [s/$historia->nombre_genero/s]</span>
+            <div class="container">
+                
+                <div id="entrada">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-8 text-center bordeHistoria">
+                            [s/$historia->sinopsis/s]
                         </div>
                     </div>
 
+                    <div class="row d-flex justify-content-center text-center">
+                        <div class="col-12 mt-3">
+                            <div class="botonesOpciones">
+                                <button id="comenzar-btn" class="btn background_color4" onclick="mostrarPagina([s/$paginas[0]->pagina_id/s])">Comenzar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
+            <!-- Páginas de la historia -->
+            [s/foreach from=$paginas item=pagina/s]
+            <div id="page-[s/$pagina->pagina_id/s]" class="content-page">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8 text-center bordeHistoria">
+                        [s/$pagina->contenido/s]
+                    </div>
+                </div>
+                <div class="choices row d-flex justify-content-evenly mt-3">
+                    [s/assign var=elecciones_disponibles value=0/s]
+                    [s/foreach from=$elecciones item=eleccion/s]
+                        [s/if $eleccion->pagina_id == $pagina->pagina_id/s]
+                        [s/assign var=elecciones_disponibles value=$elecciones_disponibles+1/s]
+                        <div class="col-md-6 text-center">
+                            <button style="max-width: 200px !important; white-space: normal !important; overflow-wrap: break-word !important;" class="btn background_color4" data-target="page-[s/$eleccion->pagina_destino_id/s]" onclick="mostrarPagina([s/$eleccion->pagina_destino_id/s])">[s/$eleccion->texto/s]</button>
+                        </div>
+                        [s//if/s]
+                    [s//foreach/s]
+                    [s/if $elecciones_disponibles == 0/s]
+                        <div class="col-12 text-center">
+                            <a href="../" class="btn background_color5" style="max-width: 200px !important; white-space: normal !important; overflow-wrap: break-word !important;">Fin de la historia <i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    [s//if/s]
+                </div>
             </div>
-
-
-
-
-
+            [s//foreach/s]
+                
+            </div>
+            
+            <hr style="border-top: 1px solid #ccc;">
+            
         </div>
     </section>
 </main>
+
+<script>
+    // Función para mostrar una página específica y ocultar las demás
+    function mostrarPagina(paginaId) {
+        // Ocultar todas las páginas
+        var paginas = document.getElementsByClassName('content-page');
+        for (var i = 0; i < paginas.length; i++) {
+            paginas[i].style.display = 'none';
+        }
+        // Mostrar la página seleccionada
+        document.getElementById('page-' + paginaId).style.display = 'block';
+        
+        // Eliminar el div con id="entrada"
+        var entradaDiv = document.getElementById('entrada');
+        if (entradaDiv) {
+            entradaDiv.parentNode.removeChild(entradaDiv);
+        }
+    }
+
+    // Inicialmente, ocultar todas las páginas
+    document.addEventListener('DOMContentLoaded', function() {
+        var paginas = document.getElementsByClassName('content-page');
+        for (var i = 0; i < paginas.length; i++) {
+            paginas[i].style.display = 'none';
+        }
+    });
+</script>

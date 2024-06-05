@@ -1,4 +1,5 @@
-
+var numPag = 0;
+var pagTotal = 2;
 var thumbnail = {
     dataUrl: 'images/avatar.png'
 };
@@ -13,18 +14,9 @@ $(document).ready(function () {
 
     var values = JSON.stringify(params);
     sendToServer(values, function(Data){
-        
-        
         chargeMainChart(Data);
-        
     });
-
-    
-
-
 });
-
-
 
 controlesPeticiones = function(Data){
     
@@ -129,106 +121,209 @@ logOut = function () {
 
 };
 
-verQR = function () {
+crearHistoria = function () {
 
     var params = new Object();
     params.controller = 'panelController';
-    params.function = 'verQR';
+    params.function = 'crearHistoria';
 
     var values = JSON.stringify(params);
     sendToServer(values, afterDo);
 
 };
 
-/**
- * Controlador para el apartadod e preguntas
- * @param [string} request_type -> create,modify,activate,deactivate, save
- * @param [integer} id -> pregunta id
- * @returns {undefined}
- */
-preguntaRequest = function (request_type, id) {
+crearNuevaHistoria = function(){
+    
+    var form = $('#historiaForm')[0];
+    var formData = new FormData(form);
+    var tituloHistoria = $('#tituloHistoria').val();
+    var sinopsisHistoria = $('#sinopsisHistoria').val();
+    
+    formData.append('controller', 'panelController');
+    formData.append('function', 'crearNuevaHistoria');
 
-    var params = new Object();
-    params.controller = 'panelController';
-    params.function = 'preguntaRequest';
-    params.request_type = request_type;
-    params.id = id;
+    if (tituloHistoria != '' && sinopsisHistoria != '') {
+        
+        if ($('#portadaHistoria').val() !== undefined && $('#portadaHistoria').val()!='') {
+            // - - - - - - - - Comprobar datos subidos - - - - - - - - 
+            const allowedExtensions = ['jpg', 'png', 'jpeg', 'gif'];
+            var fileName = $('#portadaHistoria').val();
+            var fileExtension = fileName.split('.').pop(); //Sacamos la extension del archivo
 
-    params.titulo = $('#pregunta_titulo').val();
-    params.pregunta_tipo = $('#pregunta_tipo').val();
-
-    if ($('#activar_otros').is(':checked')) {
-        params.activar_otros = 1;
-    } else {
-        params.activar_otros = 0;
-    }
-
-    var cont_options = 1;
-    params.opciones = [];
-    $('.eventNewResponse').each(function () {
-        if ($(this).val() != '') {
-
-            params.opciones[cont_options] = new Object();
-            params.opciones[cont_options].text = $(this).val();
-            params.opciones[cont_options].order = cont_options;
-            params.opciones[cont_options].option_id = $(this).attr('option_id');
-            params.opciones[cont_options].delete = 0;
-            
-
-        }else{
-            
-            params.opciones[cont_options] = new Object();
-            params.opciones[cont_options].order = cont_options;
-            params.opciones[cont_options].delete = 1;
-            params.opciones[cont_options].option_id = $(this).attr('option_id');
-            
+            if (allowedExtensions.includes(fileExtension)) {
+                sendToServerDoc(formData, afterDo);
+            } else {
+                swal("Error en la portada", "Por favor, seleccione un tipo de archivo válido (jpg, jpeg, png o gif)", "error");
+                this.value = null;
+            }
+        } else {
+            sendToServerDoc(formData, afterDo);
         }
         
-        cont_options = cont_options + 1;
-    });
+    } else {
+        swal("Error al crear la historia", "El título y la sinopsis son obligatorios", "error");
+    }
+    
+};
 
-    var cont_selects = 1;
-    params.selects = [];
-    $('.eventNewSelect').each(function () {
+modificarHistoria = function(historia_id){
+    
+    var form = $('#historiaForm'+historia_id)[0];
+    var formData = new FormData(form);
+    var tituloHistoria = $('#tituloHistoria'+historia_id).val();
+    var sinopsisHistoria = $('#sinopsisHistoria'+historia_id).val();
+    var generoHistoria = $('#generoHistoria'+historia_id).val();
+    
+    formData.append('controller', 'panelController');
+    formData.append('function', 'modificarHistoria');
+    formData.append('historia_id', historia_id);
+    formData.append('tituloHistoria', tituloHistoria);
+    formData.append('sinopsisHistoria', sinopsisHistoria);
+    formData.append('generoHistoria', generoHistoria);
 
-        if ($(this).is(':checked')) {
+    if (tituloHistoria != '' && sinopsisHistoria != '') {
+        
+        if ($('#portadaHistoria'+historia_id).val() !== undefined && $('#portadaHistoria'+historia_id).val()!='') {
+            // - - - - - - - - Comprobar datos subidos - - - - - - - - 
+            const allowedExtensions = ['jpg', 'png', 'jpeg', 'gif'];
+            var fileName = $('#portadaHistoria'+historia_id).val();
+            var fileExtension = fileName.split('.').pop(); //Sacamos la extension del archivo
 
-            params.selects[cont_selects] = new Object();
-            params.selects[cont_selects].id = $(this).attr('select_id');
-            params.selects[cont_selects].order = cont_selects;
-            cont_selects = cont_selects + 1;
+            if (allowedExtensions.includes(fileExtension)) {
+                sendToServerDoc(formData, afterDo);
+            } else {
+                swal("Error en la portada", "Por favor, seleccione un tipo de archivo válido (jpg, jpeg, png o gif)", "error");
+                this.value = null;
+            }
+        } else {
+            sendToServerDoc(formData, afterDo);
         }
+        
+    } else {
+        swal("Error al crear la historia", "El título y la sinopsis son obligatorios", "error");
+    }
+    
+};
 
+borrarHistoria = function (historia_id) {
+
+    var params = new Object();
+    
+    params.historia_id = historia_id;
+    params.controller = 'panelController';
+    params.function = 'borrarHistoria';
+    var values = JSON.stringify(params);
+    
+    sendToServer(values, afterDo);
+    
+};
+
+crearPaginas = function (historia_id) {
+
+    numPag = 1;
+
+    var params = new Object();
+    
+    params.historia_id = historia_id;
+    params.controller = 'panelController';
+    params.function = 'crearPaginas';
+    var values = JSON.stringify(params);
+    
+    sendToServer(values, afterDo);
+    
+};
+
+addPage = function () {
+    var contenidoPagina =   `<div id="pag_${numPag}">` +
+                            '<hr>' +
+                            '<div class="row">' +
+                            '<div class="col-3">' +
+                            `<h4>Página Nº ${numPag}</h4>` +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="row mb-3 text-center">' +
+                            '<div class="col-12">' +
+                            '<span>Descripción</span><br>' +
+                            `<textarea class="page-content" data-page-id="${numPag}" maxlength="500" cols="60" rows="4"></textarea>` +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="row text-center">' +
+                            `<div class="col-md-6 mb-5">` +
+                            `<button class="btn btn-secondary" id="sel_1_pag_${numPag}" onclick="addSeleccion(${numPag},1);">Añadir opción 1</button>` +
+                            '</div>' +
+                            `<div class="col-md-6 mb-5">` +
+                            `<button class="btn btn-secondary" id="sel_2_pag_${numPag}" onclick="addSeleccion(${numPag},2);" disabled>Añadir opción 2</button>` +
+                            '</div>' +
+                            '</div>';
+
+    $("#separadorBotones").before(contenidoPagina);
+    $("#comenzar").remove();
+    numPag++;
+    
+    return;
+};
+
+addSeleccion = function(numPag, opcion) {
+    var button = $("#sel_" + opcion + "_pag_" + numPag);
+    var inputId = "input_opcion_" + opcion + "_pag_" + numPag;
+
+    if (button.text() === "Añadir opción 1") {
+        button.prop("disabled", true);
+        button.after('<input type="text" class="opcion-content form-control mt-2" data-page-id="' + numPag + '" data-opcion-id="' + opcion + '" data-target-page-id="' + pagTotal + '" placeholder="Escribe aquí la opción 1">');
+        button.after(`<a href="#pag_${pagTotal}"> Ver <i class="fa fa-arrow-down"></i></a>`);
+        $("#sel_2_pag_" + numPag).prop("disabled", false);
+    } else {
+        button.prop("disabled", true);
+        button.after('<input type="text" class="opcion-content form-control mt-2" data-page-id="' + numPag + '" data-opcion-id="' + opcion + '" data-target-page-id="' + pagTotal + '" placeholder="Escribe aquí la opción 2">');
+        button.after(`<a href="#pag_${pagTotal}"> Ver <i class="fa fa-arrow-down"></i></a>`);
+    }
+
+    pagTotal++;
+    this.addPage();
+};
+
+savePages = function(historia_id){
+    
+    var pages = [];
+    var options = [];
+    
+    var params = new Object();
+
+    // Recoger datos de las páginas
+    $(".page-content").each(function(){
+        var pageId = $(this).data("page-id");
+        var content = $(this).val();
+        pages.push({
+            pagina_id: pageId,
+            contenido: content
+        });
     });
 
-    params.num_select = cont_selects;
+    // Recoger datos de las opciones
+    $(".opcion-content").each(function(){
+        var pageId = $(this).data("page-id");
+        var opcionId = $(this).data("opcion-id");
+        var targetPageId = $(this).data("target-page-id");
+        var content = $(this).val();
+        options.push({
+            pagina_id: pageId,
+            eleccion_id: opcionId,
+            pagina_destino_id: targetPageId,
+            texto: content
+        });
+    });
 
-    var values = JSON.stringify(params);
-    sendToServer(values, afterDo);
+    console.log("Pages: ", pages);
+    console.log("Options: ", options);
 
-};
-
-
-listadoPreguntas = function () {
-
-    var params = new Object();
+    params.paginas = pages;
+    params.elecciones = options;
+    params.historia_id = historia_id;
     params.controller = 'panelController';
-    params.function = 'listadoPreguntas';
-
+    params.function = 'savePages';
+    
     var values = JSON.stringify(params);
-    sendToServer(values, afterDo);
-
-};
-
-encuestasRealizadas = function () {
-
-    var params = new Object();
-    params.controller = 'panelController';
-    params.function = 'encuestasRealizadas';
-
-    var values = JSON.stringify(params);
-    sendToServer(values, afterDo);
-
+    sendToServer(values, afterDo);  
 };
 
 graficos = function () {
@@ -243,170 +338,6 @@ graficos = function () {
 
 };
 
-
-
-chargeProvinciasChart = function(Data){
-    
-  var dataChart = jQuery.parseJSON(Data.extra);
-
-    const mainChart = new Chart(document.getElementById('provincias-chart'), {
-        type: 'bar',
-        data: {
-            labels: dataChart.provincias.labels,
-            datasets: [{
-                    pointHoverBackgroundColor: '#fff',
-                    borderWidth: 2,
-                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    data: dataChart.provincias.totales,
-                    fill: true,
-                    label: 'Provincias'
-                }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            }
-        }
-    }); 
-};
-
-chargePaisesChart = function(Data){
-    
-  var dataChart = jQuery.parseJSON(Data.extra);
-
-    const mainChart = new Chart(document.getElementById('paises-chart'), {
-        type: 'bar',
-        data: {
-            labels: dataChart.paises.labels,
-            datasets: [{
-                    pointHoverBackgroundColor: '#fff',
-                    borderWidth: 2,
-                    borderColor: 'rgba(229, 107, 157, 1)',
-                    backgroundColor: 'rgba(245, 150, 189, 0.8)',
-                    data: dataChart.paises.totales,
-                    fill: true,
-                    label: 'Países',
-                }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            }
-        }
-    }); 
-};
-
-chargeComunidadesChart = function(Data){
-    
-  var dataChart = jQuery.parseJSON(Data.extra);
-
-    const mainChart = new Chart(document.getElementById('comunidades-chart'), {
-        type: 'bar',
-        data: {
-            labels: dataChart.comunidades.labels,
-            datasets: [{
-                    pointHoverBackgroundColor: '#fff',
-                    borderWidth: 2,
-                    borderColor: 'rgb(255, 152, 0, 1)',
-                    backgroundColor: 'rgb(255, 152, 0, 1)',
-                    data: dataChart.comunidades.totales,
-                    fill: true,
-                    label: 'Comunidades Autónomas',
-                }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            }
-        }
-    }); 
-};
-
-chargeCiudadesChart = function(Data){
-    
-  var dataChart = jQuery.parseJSON(Data.extra);
-
-    const mainChart = new Chart(document.getElementById('ciudades-chart'), {
-        type: 'bar',
-        data: {
-            labels: dataChart.ciudades.labels,
-            datasets: [{
-                    pointHoverBackgroundColor: '#fff',
-                    borderWidth: 2,
-                    borderColor: 'rgba(45,153,198,1)',
-                    backgroundColor: 'rgba(45,153,198,0.8)',
-                    data: dataChart.ciudades.totales,
-                    fill: true,
-                    label: 'Ciudades',
-                }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            }
-        }
-    }); 
-};
-
-chargeOptionsCharts = function (Data) {
-
-    var dataChart = jQuery.parseJSON(Data.extra);
-
-    Object.values(dataChart).forEach(val => {
-
-        if (val.pregunta_id > 0 && val.pregunta_id != 'undefined') {
-            const mainChart = new Chart(document.getElementById('chart' + val.pregunta_id), {
-                type: 'doughnut',
-                data: {
-                    labels: val.labels,
-                    datasets: [{
-                            pointHoverBackgroundColor: '#fff',
-                            data: val.totales,
-                            label: val.titulo,
-                            backgroundColor: ['rgba(75, 192, 192, 1)', 'rgba(229, 107, 157, 1)', 'rgba(45,153,198,1)', 'rgba(250, 88, 88,1)', 'rgba(252, 255, 51,1)', 'rgba(139, 88, 250,1)', 'rgba(114, 114, 115,1)']
-                        }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: val.titulo
-                }
-            });
-        }
-        
-    });
-
-
-};
-
-
-
-
 documentos = function () {
 
     var params = new Object();
@@ -418,90 +349,16 @@ documentos = function () {
 
 };
 
-crearRuta = function () {
+listado = function () {
 
     var params = new Object();
     params.controller = 'panelController';
-    params.function = 'crearRuta';
+    params.function = 'listado';
 
     var values = JSON.stringify(params);
     sendToServer(values, afterDo);
 
 };
-
-listadoRutas = function () {
-
-    var params = new Object();
-    params.controller = 'panelController';
-    params.function = 'listadoRutas';
-
-    var values = JSON.stringify(params);
-    sendToServer(values, afterDo);
-
-};
-
-/**
- * Controlador para el apartado de rutas
- * @param [string} request_type -> save
- * @param [integer} id -> ruta_id
- * @returns {undefined}
- */
-rutaRequest = function (request_type, id) {
-    switch (request_type) {
-        case 'save':
-            var form = $('#formularioRuta')[0];
-            break;
-        case 'update':
-            var form = $('#formularioModif'+id)[0];
-            break;
-    };
-    var formData = new FormData(form);
-    var imagen = $('#ruta_imagen'+id).prop('files');
-
-    var ruta_titulo = $('#ruta_titulo').val();
-
-    formData.append('controller', 'panelController');
-    formData.append('function', 'rutaRequest');
-    formData.append('request_type', request_type);
-    formData.append('id', id);
-
-    if (ruta_titulo.trim()) {
-        
-        if ($('#ruta_imagen'+id).val() !== undefined) {
-            // - - - - - - - - Comprobar datos subidos - - - - - - - - 
-            const allowedExtensions = ['jpg', 'png', 'jpeg', 'gif'];
-            var fileName = $('#ruta_imagen'+id).val();
-            var fileExtension = fileName.split('.').pop(); //Sacamos la extension del archivo
-
-            if (allowedExtensions.includes(fileExtension)) {
-                sendToServerDoc(formData, afterDo);
-            } else {
-                alert("Por favor, seleccione un tipo de archivo válido (jpg, jpeg, png o gif)");
-                this.value = null;
-            }
-        } else {
-            sendToServerDoc(formData, afterDo);
-        }
-                
-    } else {
-        alert("Por favor, introduzca al menos el título");
-    }
-};
-
-
-/*borrarRutaArchivo = function (request_type, tipoArchivo){
-    var params = new Object();
-    var ruta_id = $('#idRuta').val(); //Campo invisible dentro del popup con la id del registro que vamos a modificar
-    
-    params.controller = 'panelController';
-    params.function = 'rutaRequest';
-    params.request_type = request_type;
-    params.ruta_id = ruta_id;
-    params.tipoArchivo = tipoArchivo;
-    
-    var values = JSON.stringify(params);
-    sendToServer(values, listadoRutas);
-};*/
 
 
 borrarRuta = function(ruta_id){
@@ -653,49 +510,4 @@ addNewResponse = function () {
     divInput = divInput + '<div class="float_left padding-top5 padding-left10 cursor_pointer"><i class="fa-solid fa-sort"></i></div>';
     divInput = divInput + '</div></div>';
     $('#addResponse').append(divInput);
-};
-
-verEncuestaPage = function(id){
-    
-    $('.loading-div').css('display', 'block');
-    var params = new Object();
-    params.controller = 'panelController';
-    params.function = 'verEncuestaPage';
-    params.id = id;
-
-    var values = JSON.stringify(params);
-    sendToServer(values, afterDo);
-    
-};
-
-verPreguntaPage = function(id){
-    
-    $('.loading-div').css('display', 'block');
-    var params = new Object();
-    params.controller = 'panelController';
-    params.function = 'verPreguntaPage';
-    params.id = id;
-
-    var values = JSON.stringify(params);
-    sendToServer(values, afterDo);
-    
-};
-
-cargarInforme = function(){
-    
-    $('.loading-div').css('display', 'block');
-    var params = new Object();
-    params.controller = 'panelController';
-    params.function = 'cargarInforme';
-    params.id = $('#seleccionInforme').val();
-
-    var values = JSON.stringify(params);
-    sendToServer(values, function(Data){
-        
-        $('#cargarTablaInforme').empty();
-        $('#cargarTablaInforme').html(Data.result);
-        var idtablaInformes = ['informesPreguntas','informesPreguntasLocalidad','informesPreguntasProvincia','informesPreguntasComunidad','informesPreguntasPais'];
-        cargarDataTablesInformes(idtablaInformes);
-        
-    });
 };
