@@ -96,33 +96,42 @@ validateEmail = function (sEmail) {
 
 afterDo = function (Data) {
 
-    disableModals();
-
-    if (Data.extra == 'SESSION_FALSE') {
-
-        window.location.href = Data.result;
-
+    if(Data.type_msg == "USER_ERROR" || Data.type_msg == "USER_INFO"){
+        
+        if (Data.type_msg == 'USER_ERROR') {
+            $("#errorRegistro").text(Data.msg);
+        } else {
+            $("#errorRegistro").html(`<p class="text-success">${Data.msg}</p>`);
+        }
+        
     } else {
-
-        scrollSmooth();
-
-
-        $('#container-principal').empty();
-        $('#container-principal').html(Data.result);
-
-        cargarEventoSelectTipo();
         
-        var ids_datatables = ['listadoPreguntas'];
-        cargarDataTables(ids_datatables);
-        var id_tablaRutas = ['tablaRutas'];
-        cargarDataTables(id_tablaRutas);
-        showModalsInfo(Data);
-        
-        controlesPeticiones(Data);
+        disableModals();
+        if (Data.extra == 'SESSION_FALSE') {
+
+            window.location.href = Data.result;
+
+        } else {
+
+            scrollSmooth();
 
 
+            $('#container-principal').empty();
+            $('#container-principal').html(Data.result);
+
+            cargarEventoSelectTipo();
+
+            var ids_datatables = ['listadoPreguntas'];
+            cargarDataTables(ids_datatables);
+            var id_tablaRutas = ['tablaRutas'];
+            cargarDataTables(id_tablaRutas);
+            showModalsInfo(Data);
+
+            controlesPeticiones(Data);
+
+
+        }
     }
-
 };
 
 

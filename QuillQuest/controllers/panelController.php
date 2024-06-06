@@ -765,9 +765,6 @@ final class panelController extends controller{
         $model = new usersModel();
         $user_id = $params->user_id;
         $password = $params->pass;
-
-        // no crees funciones dentro de funciones xDDD te la he sacado fuera y se accede con $this-> porque está dentro de la clase.
-        // de hecho esa función podría estar en la librería de funciones comunes, pero bueno como este proyecto no tiene más sitios pues se deja en esta clase.
         
         $password_segura = $this->securePass($password);
 

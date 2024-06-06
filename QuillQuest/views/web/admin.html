@@ -6,18 +6,75 @@
 
     <div class="container">
         
+        
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+                    Registrarse
+                </button>
+            </div>
+        </div>
+        
+        
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title text-dark" id="exampleModalLabel"><b>Formulario de registro</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+              <label for="nombre" style="color: black !important;">Nombre<b class="text-danger">*</b></label>
+            <input type="text" class="form-control" id="nombre" placeholder="Nombre real o alias">
+          </div>
+          <div class="form-group">
+            <label for="apellidos" style="color: black !important;">Apellidos</label>
+            <input type="text" class="form-control" id="apellidos" placeholder="Apellido/s (opcional)">
+          </div>
+          <div class="form-group">
+            <label for="email" style="color: black !important;">Email<b class="text-danger">*</b></label>
+            <input type="email" class="form-control" id="email" placeholder="Introduce tu correo electrónico">
+            <small class="form-text text-muted">Podrás logearte con tu email</small>
+          </div>
+          <div class="form-group">
+            <label for="pass1" style="color: black !important;">Contraseña<b class="text-danger">*</b></label>
+            <input type="password" class="form-control" id="pass1">
+            <small class="form-text text-muted">Mínimo 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial</small>
+          </div>
+          <div class="form-group" style="color: black !important;">
+            <label for="pass2">Repetir contraseña<b class="text-danger">*</b></label>
+            <input type="password" class="form-control" id="pass2">
+          </div>
+          <p class="text-danger" id="errorRegistro"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="registrarUsuario();">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+        
+        
+        
+        
         <div id="resultLogin" class="text-18">
             
         </div>
 
         <div class="row padding20">
             <div class="col-md-12">
-                <label for="nombre" class="labelGrey">Usuario</label> 
+                <label for="nombre" class="labelGrey text-white">Email</label> 
                 <input size="1" type="text" name="usuario" id="usuario" class="allWidth input_contact form-control" placeholder="Correo electrónico" required="required" aria-required="true">
             </div>
 
             <div class="col-md-12 margin-top10">
-                <label for="email" class="labelGrey">Contraseña</label>
+                <label for="email" class="labelGrey text-white">Contraseña</label>
                 <input type="password" name="password" id="password" class="allWidth input_contact form-control" placeholder="Contraseña" required="required" aria-required="true">
             </div>
 

@@ -183,4 +183,56 @@ leerHistoria = function(historia_id){
     var values = JSON.stringify(params);
     sendToServer(values, afterDo);
     
-}
+};
+
+function registrarUsuario() {
+    
+    // Validar campos
+    var nombre = $("#nombre").val();
+    var apellidos = $("#apellidos").val();
+    var email = $("#email").val();
+    var pass1 = $("#pass1").val();
+    var pass2 = $("#pass2").val();
+    
+    var params = new Object();
+    params.controller = 'webController';
+    params.function = 'registrarUsuario';
+    params.name = nombre;
+    params.lastname = apellidos;
+    params.email = email;
+    params.password = pass1;
+        
+    // Realizar validaciones aquí
+    var error = '';
+
+    // Validación de campo obligatorio: nombre
+    if (nombre.trim() === '' && email.trim() === '' && pass1.trim() === '' && pass2.trim() === '') {
+        error += 'Los campos con un asterisco (*) son obligatorios. ';
+    }
+
+    // Ejemplo de validación: contraseña igual
+    if (pass1 !== pass2) {
+        error += 'Las contraseñas no coinciden. ';
+    }
+
+    // Ejemplo de validación: longitud de la contraseña
+    if (pass1.length < 8) {
+        error += 'La contraseña debe tener al menos 8 caracteres. ';
+    }
+
+    // Ejemplo de validación: email
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        error += 'El correo electrónico no es válido. ';
+    }
+
+    // Mostrar mensaje de error o éxito
+    if (error !== '') {
+        $("#errorRegistro").text(error);
+    } else {
+        error = '';
+        
+        var values = JSON.stringify(params);
+        sendToServer(values, afterDo);
+    }
+};

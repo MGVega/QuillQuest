@@ -1,9 +1,6 @@
 <main>
     <!-- Fin de la sección inicial, inicio de la siguiente sección -->
     <section>
-        
-        
-        <h3 class="color3 margin-top-page text-center">Historias destacadas</h3>
 
         <div class="containerFoto d-flex justify-content-center">
             <div id="carouselExampleIndicators" class="carousel carroInicio slide h-100" data-ride="carousel">
@@ -12,16 +9,19 @@
                   <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                   <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img class="d-block w-100" src="images/portadas/cthulhu.jpg" alt="First slide">
+                <div class="carousel-inner" style="max-height: 465px;">
+                  [s/$primera = true/s]
+                  [s/foreach from=$historias_carro item=carro/s]
+                  <div class="carousel-item [s/if $primera/s]active[s//if/s]">
+                    <div class="carousel-overlay" style="position: absolute;top: 70%;left: 0;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.5);"></div>
+                    <img class="d-block w-100" src="[s/$carro->portada/s]" alt="First slide"  style="max-height: 465px;">
+                    <div class="carousel-caption d-none d-md-block color4">
+                        <h4><a href="rutaSeleccionada/[s/$carro->historia_id/s]">[s/$carro->titulo/s]</a></h4>
+                        <p>Género: [s/$carro->nombre_genero/s]</p>
+                    </div>
                   </div>
-                  <div class="carousel-item">
-                    <img class="d-block w-100" src="images/portadas/cloudpunk.jpg" alt="Second slide">
-                  </div>
-                  <div class="carousel-item">
-                    <img class="d-block w-100" src="images/portadas/skyrim.jpg" alt="Third slide">
-                  </div>
+                  [s/$primera = false/s]
+                  [s//foreach/s]
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -65,183 +65,29 @@ Explora historias llenas de posibilidades donde cada elección que tomes te llev
 
             <div class="margin-top40">
 
-                <h3 class="color3">Más historias</h3>
+                <h3 class="color3">Últimas historias</h3>
 
                 <div class="separadorWeb"></div>
 
                 <div class="row">
-
+                    [s/foreach from=$historias item=historia/s]
                     <div class="col-md-4 margin-top20">
-
                         <div class="card">
-                            <img src="images/web/ayuntamiento.jpg" class="card-img-top" alt="Ayuntamiento de Mirandilla">
+                            <div  style=" height: 190px; overflow: hidden; background-color: #ffbc44 ">
+                                <img src="[s/$historia->portada/s]" class="card-img-top portadaHistoriaWeb">
+                            </div>
                             <div class="card-body background_color4 botonWeb">
-                                <a href="rutaSeleccionada/29" class="btn background_color4">Detalles <i class="fa-solid fa-caret-right"></i></a>
+                                <a href="rutaSeleccionada/[s/$historia->historia_id/s]" class="background_color4"><b>[s/$historia->titulo/s] </b><br><span>Género: [s/$historia->nombre_genero/s]</span><br>
+                                <span>Autor: [s/$historia->name/s] [s/$historia->lastname/s]</span></a>
+                                
                             </div>
                         </div>
-
-
                     </div>
-
-                    <div class="col-md-4 margin-top20">
-
-                        <div class="card">
-                            <img src="images/web/iglesia.jpg" class="card-img-top" alt="Iglesia parroquial de Santa María Magdalena">
-                            <div class="card-body background_color4 botonWeb">
-                                <a href="iglesia" class="colorBlack">Iglesia parroquial de Santa María Magdalena</a>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <div class="col-md-4 margin-top20">
-
-                        <div class="card">
-                            <img src="images/web/cornalvo_small.jpg" class="card-img-top" alt="Cornalvo">
-                            <div class="card-body background_color4 botonWeb">
-                                <a href="cornalvo" class="colorBlack">Cornalvo</a>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                </div>
-                
-                <div class="row">
-
-                    <div class="col-md-4 margin-top20">
-
-                        <div class="card">
-                            <img src="images/web/ermitasanisidro.jpg" class="card-img-top" alt="Ermita de San Isidro">
-                            <div class="card-body background_color4 botonWeb">
-                                <a href="ermitasanisidro" class="colorBlack">Ermita de San Isidro</a>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <div class="col-md-4 margin-top20">
-
-                        <div class="card">
-                            <img src="images/web/ermitasanroque.jpg" class="card-img-top" alt="Ermita de San Roque">
-                            <div class="card-body background_color4 botonWeb">
-                                <a href="ermitasanroque" class="colorBlack">Ermita de San Roque</a>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-
+                    [s//foreach/s]
                 </div>
 
 
             </div>
-
-            <div class="margin-top40">
-
-                <h3 class="color3">Servicios</h3>
-
-                <div class="separadorWeb"></div>
-
-                <div class="row">
-
-                    <div class="col-md-3">
-
-                        <div class="card">
-                            
-                            <div class="card-body background_color4 text_center botonWeb">
-                                <a href="https://sede.mirandilla.es/portal/entidades.do?opcion=0&pes_cod=9&ent_id=1&idioma=1" target="_blank" class="colorBlack"><i class="fa-solid fa-globe"></i> Sede electrónica</a>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <div class="col-md-3">
-
-                        <div class="card">
-
-                            <div class="card-body background_color4 text_center botonWeb">
-                                <a href="https://contrataciondelestado.es/wps/portal/plataforma" target="_blank" class="colorBlack"><i class="fa-solid fa-file"></i> Plataforma de contratación del estado</a>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    
-                    <div class="col-md-3">
-
-                        <div class="card">
-
-                            <div class="card-body background_color4 text_center botonWeb">
-                                <a href="https://centinela.lefebvre.es/public/concept/1622234?access=q0QJdGK4gr2JeYqd2iOljmXpjk2bYCo6E2hVIj9Nc4c%3D" target="_blank" class="colorBlack"><i class="fa-solid fa-shield-halved"></i> Canal de denuncias</a>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    
-                    <div class="col-md-3">
-
-                        <div class="card">
-
-                            <div class="card-body background_color4 text_center botonWeb botonWeb">
-                                <a href="https://www.bandomovil.com/mirandilla" target="_blank" class="colorBlack"><i class="fa-solid fa-mobile-screen-button"></i> Bando móvil</a>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-
-                <div class="row margin-top20">
-
-                    <div class="col-md-3">
-
-                        <div class="card">
-
-                            <div class="card-body background_color4 text_center botonWeb">
-                                <a href="https://www.google.es/maps/place/06891+Mirandilla,+Badajoz/@38.9990877,-6.3024245,3475m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd142f6ef49985e7:0x63537dd4dc1b39b!8m2!3d39.0018564!4d-6.2920425!16s%2Fm%2F02z7l_p?hl=es" target="_blank" class="colorBlack"><i class="fa-solid fa-map"></i> Callejero</a>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <div class="col-md-3">
-
-                        <div class="card">
-
-                            <div class="card-body background_color4 text_center botonWeb">
-                                <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios/mirandilla-id06084" target="_blank" class="colorBlack"><i class="fa-solid fa-sun"></i> El tiempo</a>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    
-                    <div class="col-md-3">
-
-                        <div class="card">
-
-                            <div class="card-body background_color4 text_center botonWeb">
-                                <a href="encuesta" target="_blank" class="colorBlack"><i class="fa-solid fa-square-poll-vertical"></i> Encuesta</a>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                
-            </div>
-
-
         </div>
 
     </section>

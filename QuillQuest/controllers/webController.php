@@ -91,7 +91,15 @@ final class webController extends controller{
             $this->template->assign("datosRutas", $result_modelRutas);
         }
         
-        if(empty($this->page)){          
+        if(empty($this->page)){
+            
+            $modelHistorias = new historiasModel();
+            $result_historias = $modelHistorias->select('','','*',' LEFT JOIN wi_users ON (wi_historias.autor_id = wi_users.user_id) LEFT JOIN wi_generos ON (wi_historias.historia_genero_id = wi_generos.genero_id) ORDER BY historia_id DESC LIMIT 6 ');
+            
+            $historias_carro = $modelHistorias->select('','','*',' LEFT JOIN wi_users ON (wi_historias.autor_id = wi_users.user_id) LEFT JOIN wi_generos ON (wi_historias.historia_genero_id = wi_generos.genero_id) ORDER BY historia_id ASC LIMIT 3 ');
+            
+            $this->template->assign("historias", $result_historias);
+            $this->template->assign("historias_carro", $historias_carro);
             
             $content = $this->template->fetch("web/index.html");
         }
@@ -254,6 +262,10 @@ final class webController extends controller{
             case 'guardarEncuesta':
                 $resultado = $this->guardarEncuesta($params);
                 break;
+
+            case 'registrarUsuario':
+                $resultado = $this->registrarUsuario($params);
+                break;
             
             case 'obtenerProvincias':
                 $resultado = $this->obtenerProvincias($params);
@@ -276,6 +288,52 @@ final class webController extends controller{
         }
 
         return $resultado;
+    }
+    
+    
+    private function registrarUsuario($params) {
+        
+        //echo print_r($params);
+        $name = $params->name;
+        $lastname = $params->lastname;
+        $email = $params->email;
+        $password = $params->password;
+        $password_segura = $this->securePass($password);
+        
+        $usersModel = new usersModel();
+        $result = $usersModel->select('email="'.$email.'"','','email');
+                
+        $usersModel->setActive(1);
+        $usersModel->setEmail($email);
+        $usersModel->setLastname($lastname);
+        $usersModel->setPassword($password_segura);
+        $usersModel->setName($name);
+        $usersModel->setRole(2);
+        $usersModel->setCreated_by("pruebas");
+        $usersModel->setAttempts(1);
+        $usersModel->setBlocked(0);
+        
+        if (count($result) > 0) {
+            $this->msg = 'No se ha podido crear el usuario. El correo electrónico ya existe.';
+            $this->type_msg = 'USER_ERROR';
+        } else{
+            $this->msg = 'Usuario creado correctamente';
+            $this->type_msg = 'USER_INFO';
+            $usersModel->add();
+        }
+        
+        //$send = $this->template->fetch('web/index.html');
+        $send='';
+        
+        return $this->getJSONEncode($send);
+    }
+    
+    private function securePass($password) {
+        $password_encrypt = $password;
+        $costt = array('cost' => PASSWORD_BCRYPT_DEFAULT_COST);
+        $password_encrypt_aux = password_hash($password_encrypt, PASSWORD_BCRYPT, $costt);
+
+        return $password_encrypt_aux;
     }
 
 
