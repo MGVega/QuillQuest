@@ -270,7 +270,7 @@ addSeleccion = function(numPag, opcion) {
     if (button.text() === "Añadir opción 1") {
         button.prop("disabled", true);
         button.after('<input type="text" class="opcion-content form-control mt-2" data-page-id="' + numPag + '" data-opcion-id="' + opcion + '" data-target-page-id="' + pagTotal + '" placeholder="Escribe aquí la opción 1">');
-        button.after(`<a href="#pag_${pagTotal}"> Pág ${pagTotal} <i class="fa fa-arrow-down"></i></a>`);
+        button.after(`<a href="#pag_${pagTotal}" style="color: white !important;"> Pág ${pagTotal} <i class="fa fa-arrow-down"></i></a>`);
         $("#sel_2_pag_" + numPag).prop("disabled", false);
     } else {
         button.prop("disabled", true);

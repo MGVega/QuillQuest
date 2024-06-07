@@ -173,7 +173,15 @@ final class rutasController extends controller{
         $descripcion = "";
         $nombre = "";
         $imagen = "";
-
+        
+        session_start();
+        if($_SESSION['name_user']){
+            $usuarioModel = new usersModel();
+            $resultado = "../".$usuarioModel->select("user_id=".$_SESSION['user_id'])[0]->photo;
+            $plantilla_header->assign('testt', "hola");
+            $plantilla_header->assign('fotoPerfil', $resultado);
+        }
+        
         $plantilla_header->assign('nombre_pagina', $nombre);
         $plantilla_header->assign('descripcion_pagina', $descripcion);
         $plantilla_header->assign('imagen_pagina', $imagen);
