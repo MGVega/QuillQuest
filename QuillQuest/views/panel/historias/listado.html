@@ -4,8 +4,8 @@
         <table id="tablaRutas" class="datatable display">
             <thead>
                 <tr>
-                    <th>Título</th>
-                    <th>Sinopsis</th>
+                    <th style="background-color: #222222;">Título</th>
+                    <th class="d-none d-md-block">Sinopsis</th>
                     <th>Género</th>
                     <th>Portada</th>
                     <th>Opciones</th>
@@ -16,7 +16,7 @@
                     [s/foreach from=$historias item=historia/s]
                     <tr id="h_[s/$historia->historia_id/s]">
                         <td>[s/$historia->titulo/s]</td>
-                        <td>[s/$historia->sinopsis/s]</td>
+                        <td class="d-none d-md-block">[s/$historia->sinopsis/s]</td>
                         <td>[s/foreach from=$generos item=genero/s][s/if $genero->genero_id == $historia->historia_genero_id/s][s/$genero->nombre_genero/s][s//if/s][s//foreach/s]</td>
                         <td>
                             [s/if $historia->portada != ''/s]
@@ -53,7 +53,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
 
-                    <div class="modal-body">
+                    <div class="modal-body" style="color: black !important;">
 
                         <div class="row text-center mb-3">
                             <h2>Modificar historia</h2>
@@ -104,7 +104,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
 
-                    <div class="modal-body">
+                    <div class="modal-body" style="color: black !important;">
 
                         <div class="text-20">
                             <strong>Eliminar historia: [s/$historia->titulo/s]</strong>

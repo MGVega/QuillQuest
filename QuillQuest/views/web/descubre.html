@@ -1,11 +1,7 @@
 <main>
-
     <section>
-
         <div class="container text-16 mb-5">
-
             <h3 class="color3 margin-top-page">Descubre historias</h3>
-
             <div class="separadorWeb"></div>
             
             <div class="accordion">
@@ -17,19 +13,10 @@
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
-                        <!--<div class="row ml-1 mb-3">
-                            Que incluya:
-                            <div class="col-md-2 col-sm-4">
-                                <select class="form-select" aria-label="Default select example" id="filtroIncluir">
-                                    <option value="1" selected>Cualquiera</option>
-                                    <option value="2">Todos</option>
-                                </select>
-                            </div>
-                        </div>-->
                         <div class="row ml-1">
                             [s/foreach from=$generos item=genero/s]
                             <div class="col-md-2 col-sm-6">
-                                <input class="form-check-input" type="checkbox" value="" id="genero_[s/$genero->genero_id/s]">
+                                <input class="form-check-input" type="checkbox" value="[s/$genero->nombre_genero/s]" id="genero_[s/$genero->genero_id/s]" onchange="filterStories()">
                                 <label class="form-check-label" for="genero_[s/$genero->genero_id/s]">
                                   [s/$genero->nombre_genero/s]
                                 </label>
@@ -38,18 +25,68 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-4 col-sm-12">
-                              <input class="form-control mr-sm-2" type="search" placeholder="Búsqueda por título" aria-label="Search">
+                              <input class="form-control mr-sm-2" type="search" placeholder="Búsqueda por título" aria-label="Search" id="searchInput" oninput="filterStories()">
                             </div>
                             <div class="col-2">
-                              <button class="btn background_color3 my-2 my-sm-0 text-white" type="submit">Buscar</button>
+                              <button class="btn background_color3 my-2 my-sm-0 text-white" type="button" onclick="filterStories()">Buscar</button>
                             </div>
                         </div>
                       </div>
                     </div>
                 </div>
             </div>
-
+            
+            <div class="row">
+                [s/foreach from=$historias item=historia/s]
+                <div class="col-md-4 margin-top20 story-card" data-genero="[s/$historia->nombre_genero/s]" data-titulo="[s/$historia->titulo/s]">
+                    <div class="card">
+                        <div style=" height: 190px; overflow: hidden; background-color: #ffbc44 ">
+                            <img src="[s/$historia->portada/s]" class="card-img-top portadaHistoriaWeb">
+                        </div>
+                        <div class="card-body background_color4 botonWeb">
+                            <a href="rutaSeleccionada/[s/$historia->historia_id/s]" class="background_color4"><b>[s/$historia->titulo/s]</b><br><span>Género: [s/$historia->nombre_genero/s]</span><br>
+                            <span>Autor: [s/$historia->name/s] [s/$historia->lastname/s]</span></a>
+                        </div>
+                    </div>
+                </div>
+                [s//foreach/s]
+            </div>
         </div>
     </section>
-
 </main>
+
+<script>
+function filterStories() {
+    // Obtener valores de los filtros
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const checkboxes = document.querySelectorAll('.form-check-input');
+    
+    // Obtener todas las cards
+    const cards = document.querySelectorAll('.story-card');
+    
+    // Crear un array con los géneros seleccionados
+    const selectedGenres = [];
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            selectedGenres.push(checkbox.value.toLowerCase());
+        }
+    });
+    
+    // Filtrar las cards
+    cards.forEach(card => {
+        const title = card.getAttribute('data-titulo').toLowerCase();
+        const genre = card.getAttribute('data-genero').toLowerCase();
+        
+        // Condición de visibilidad
+        const matchesSearch = title.includes(searchInput);
+        const matchesGenre = selectedGenres.length === 0 || selectedGenres.includes(genre);
+        
+        // Mostrar u ocultar la card
+        if (matchesSearch && matchesGenre) {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+</script>

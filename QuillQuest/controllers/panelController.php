@@ -112,33 +112,30 @@ final class panelController extends controller{
         $usuariosModel = new usersModel();
         $usuarioDatos = $usuariosModel->select("user_id=".intval($_SESSION['user_id']))[0];
         $this->template->assign('fotoPerfil', $usuarioDatos->photo);
+        $this->template->assign('usuario', $usuarioDatos);
         
-        // Encuestas totales
-        $encuestas = new encuestaRepository();
-        $result_encuestas = $encuestas->getEncuestasTotales();
-        $this->template->assign('encuestasTotales',$result_encuestas[0]->encuestasTotales);
+        $usuarioID = intval($_SESSION['user_id']);
+        //Historias totales
+        $historiasModel = new historiasModel();
         
-        // Encuestas en el día
-        $result_dia = $encuestas->getEncuestasDia();
-        $this->template->assign('encuestasTotalesDia',$result_dia[0]->totalesDia);
+        $select = " (SELECT COUNT(*) 
+                    FROM wi_historias 
+                    WHERE autor_id = $usuarioID) AS total_historias,
+                   (SELECT COUNT(*) 
+                    FROM wi_paginas p 
+                    INNER JOIN wi_historias h ON p.historia_id = h.historia_id 
+                    WHERE h.autor_id = $usuarioID) AS total_paginas,
+                   (SELECT COUNT(*) 
+                    FROM wi_elecciones e 
+                    INNER JOIN wi_paginas p ON e.pagina_id = p.pagina_id 
+                    INNER JOIN wi_historias h ON p.historia_id = h.historia_id 
+                    WHERE h.autor_id = $usuarioID) AS total_elecciones";
         
-        // Visitas
-        $visitas = new analyticsModel();
-        $result_visitas = $visitas->select();
-        $visitas_principal = $result_visitas[0]->visitas_principal;
-        $this->template->assign('visitasPrincipal', $visitas_principal);
+        $historias = $historiasModel->select('autor_id='.intval($_SESSION['user_id']), '', $select);
         
-        $visitas_rutas = $result_visitas[0]->visitas_rutas;
-        $this->template->assign('visitasRutas', $visitas_rutas);
-        
-        $visitas_encuesta = $result_visitas[0]->visitas_encuesta;
-        $this->template->assign('visitasEncuesta', $visitas_encuesta);        
-        
-        // Rutas
-        $rutas = new rutasModel();
-        $result_rutas = $rutas->select('','','count(ruta_id) as rutasTotales');
-        $this->template->assign('rutasTotales',$result_rutas[0]->rutasTotales);
-
+        $this->template->assign('historias_totales', $historias[0]->total_historias);
+        $this->template->assign('elecciones_totales', $historias[0]->total_elecciones);
+        $this->template->assign('paginas_totales', $historias[0]->total_paginas);
         
     }
     
@@ -333,7 +330,7 @@ final class panelController extends controller{
         }
         
         $model_historias = new historiasModel();
-        $result_historias = $model_historias->select();
+        $result_historias = $model_historias->select('autor_id='.$this->user_id);
         $model_generos = new generosModel();
         $result_generos = $model_generos->select();
         
@@ -352,7 +349,7 @@ final class panelController extends controller{
     private function listado(){
         
         $model_historias = new historiasModel();
-        $result_historias = $model_historias->select();
+        $result_historias = $model_historias->select('autor_id='.$this->user_id);
         $model_generos = new generosModel();
         $result_generos = $model_generos->select();
         
@@ -390,7 +387,7 @@ final class panelController extends controller{
         
         
         $model_historias = new historiasModel();
-        $result_historias = $model_historias->select();
+        $result_historias = $model_historias->select('autor_id='.$this->user_id);
         $model_generos = new generosModel();
         $result_generos = $model_generos->select();
         

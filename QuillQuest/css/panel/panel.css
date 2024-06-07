@@ -13,8 +13,46 @@ main{
 }
 
 body {
-
     
+}
+
+.sidebar{
+    background-color: #121212 !important;
+    border-right: solid 1px white !important;
+}
+
+.header{
+    background-color: #121212 !important;
+}
+
+.header svg{
+    color: white !important;
+}
+
+.body{
+    background-color: #121212 !important;
+    margin-top: -25px;
+    color: white;
+}
+
+.card li{
+    color: black !important;
+}
+
+#tablaRutas_length, #tablaRutas_filter, #tablaRutas_filter input, #dataTables_info{
+    color: white !important;
+}
+
+#tablaRutas_length select{
+    color: white !important;
+}
+
+th, td{
+    background-color: #222222 !important;
+}
+
+#tablaRutas_previous, #tablaRutas_next, #dataTables_info, .dataTables_info{
+    color: white !important;
 }
 
 footer img{

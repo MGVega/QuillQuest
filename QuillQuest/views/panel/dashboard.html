@@ -1,7 +1,7 @@
 <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
     <div class="sidebar-brand d-none d-md-flex">
 
-        QuillQuest
+        <a href="../quillquest"><img src="images/logo/horizont_claro_sin_fondo.png" style="width: 180px;"></a>
     </div>
     <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
         <li class="nav-item">
@@ -11,7 +11,7 @@
                 </svg> Dashboard
             </a>
         </li>
-        <li class="nav-title">OPCIONES</li>
+        <li class="nav-title">HISTORIAS</li>
         <li class="nav-item">
             <a class="nav-link" href="#" onclick="crearHistoria();">
                 <svg class="nav-icon">
@@ -19,9 +19,6 @@
                 </svg> Crear historia
             </a>
         </li>
-        
-        <li class="nav-divider"></li>
-        <li class="nav-title">MIS HISTORIAS</li>
         <li class="nav-item">
             <a class="nav-link" href="#" onclick="listado();">
                 <svg class="nav-icon">
@@ -30,11 +27,22 @@
             </a>
         </li>
         
-        <li class="nav-item">
-            <a class="nav-link" href="#" onclick="">
+        <li class="nav-divider"></li>
+        <li class="nav-title">PERFIL</li>
+        
+        <li class="nav-item" style="cursor:pointer;">
+            <a class="nav-link" onclick="perfil();">
                 <svg class="nav-icon">
                 <use xlink:href="lib/coreui/vendors/@coreui/icons/svg/free.svg#cil-list"></use>
-                </svg> Balance
+                </svg> Mis datos
+            </a>
+        </li>
+        
+        <li class="nav-item" style="cursor:pointer;">
+            <a class="nav-link" onclick="logOut();">
+                <svg class="nav-icon">
+                <use xlink:href="lib/coreui/vendors/@coreui/icons/svg/free.svg#cil-arrow-left"></use>
+                </svg> Salir
             </a>
         </li>
 
@@ -51,9 +59,7 @@
                 <use xlink:href="lib/coreui/vendors/@coreui/icons/svg/free.svg#cil-menu"></use>
                 </svg>
             </button><a class="header-brand d-md-none" href="#">
-                <svg width="118" height="46" alt="CoreUI Logo">
-                <use xlink:href="lib/coreui/assets/brand/coreui.svg#full"></use>
-                </svg></a>
+                <a href="../quillquest"><img src="images/logo/simbolo sin fondo.png" style="width: 50px;"></a>
 
             <ul class="header-nav ms-3">
                 <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -85,89 +91,32 @@
 
     <div class="body flex-grow-1 px-3" id="container-principal">
         <div class="container-lg">
-            <div class="row">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card mb-4 text-white bg-primary">
-                        <div class="card-body pb-0 d-flex justify-content-between align-items-start">
-                            <div>
-                                <div class="fs-4 fw-semibold">[s/$encuestasTotales/s]</div>
-                                <div>Encuestas totales</div>
-                            </div>
-
-                        </div>
-                        <div class="c-chart-wrapper mt-3 mx-3" style="height:70px;">
-                            <canvas class="chart" id="card-chart1" height="70"></canvas>
-                        </div>
-                    </div>
+            <div class="row mt-5">
+                <div class="col-12 text-center color4">
+                    <h1>Bienvenido [s/$usuario->name/s] [s/$usuario->lastname/s]</h1>
                 </div>
-                <!-- /.col-->
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card mb-4 text-white bg-info">
-                        <div class="card-body pb-0 d-flex justify-content-between align-items-start">
-                            <div>
-                                <div class="fs-4 fw-semibold">[s/$encuestasTotalesDia/s]</div>
-                                <div>Encuestas del día</div>
-                            </div>
-
-                        </div>
-                        <div class="c-chart-wrapper mt-3 mx-3" style="height:70px;">
-                            <canvas class="chart" id="card-chart2" height="70"></canvas>
-                        </div>
-                    </div>
-                </div>
+            </div>
+            
+            
+            <div class="row d-flex justify-content-center mt-4">
                 <!-- /.col-->
                 <div class="col-sm-6 col-lg-3">
                     <div class="card mb-4 text-white bg-warning">
                         <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                             <div>
-                                <div class="fs-4 fw-semibold">[s/$visitasPrincipal + $visitasRutas + $visitasEncuesta/s]</div>
-                                <div>Visitas totales</div>
+                                <div class="fs-4 fw-semibold">[s/$historias_totales/s]</div>
+                                <div>Historias totales</div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between align-items-start mt-2 mb-2" style="height:70px;">
+                        <div class="align-items-start mt-4 mb-2" style="height:70px;">
                             <div style="margin-left: 16px">
-                                <div>Principal: <b>[s/$visitasPrincipal/s]</b></div>
-                                <div>Rutas: <b>[s/$visitasRutas/s]</b></div>
-                                <div>Encuesta: <b>[s/$visitasEncuesta/s]</b></div>
+                                <div>Páginas realizadas: <b>[s/$paginas_totales/s]</b></div>
+                                <div>Opciones creadas: <b>[s/$elecciones_totales/s]</b></div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card mb-4 text-white bg-danger">
-                        <div class="card-body pb-0 d-flex justify-content-between align-items-start">
-                            <div>
-                                <div class="fs-4 fw-semibold">[s/$rutasTotales/s]</div>
-                                <div>Rutas</div>
-                            </div>
-
-                        </div>
-                        <div class="c-chart-wrapper mt-3 mx-3" style="height:70px;">
-                            <canvas class="chart" id="card-chart4" height="70"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.col-->
             </div>
-            <!-- /.row-->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title mb-0">Balance - encuestas</h4>
-                            <div class="small text-medium-emphasis">Últimos 6 meses</div>
-                        </div>
-                    </div>
-                    <div class="c-chart-wrapper" style="height:300px;margin-top:40px;">
-                        <canvas class="chart" id="main-chart" height="300"></canvas>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- /.row-->
-
         </div>
     </div>
     [s/$footer/s]

@@ -44,42 +44,21 @@ final class webController extends controller{
             $extra = "../";
         }
 
-        $this->printHeaderHTML($extra);        
+        $this->printHeaderHTML($extra);
 
         $this->template->assign("reCaptcha", _KEY_CAPTCHA);
         $this->template->assign("urlEnvironment", _URL_ENVIRONMENT);
-        
-        if ($this->page == 'encuesta') {
-            
-            $show_menu = false;
-            
-             // Al entrar en la página de encuestas, cargamos la base de datos con las preguntas            
-            $preguntas = new preguntaRepository();
-            $totalPreguntas = $preguntas->getPreguntas(1);
-            
-            //cargamos países, provincias y localidades.
-            $paises = new countriesModel();
-            $provincias = new statesModel();
-            $ciudades = new citiesModel();
-            $comunidades = new comunidadesModel();
-            $result_paises = $paises->select('country_id>0 ORDER BY name','','name,native,country_id');
-            $result_provincias = $provincias->select('state_id>0 ORDER BY name','','name,state_id,country_id,comunidad_id');
-            $result_ciudades = $ciudades->select('city_id>0 ORDER BY name','','name,state_id,country_id,city_id');
-            $result_comunidades = $comunidades->select('comunidad_id>0 ORDER BY name','','name,country_id,comunidad_id');
-            
-            $this->template->assign("datosPreguntas", $totalPreguntas);
-            $this->template->assign("paises", $result_paises);
-            $this->template->assign("provincias", $result_provincias);
-            $this->template->assign("ciudades", $result_ciudades);
-            $this->template->assign("comunidades", $result_comunidades);
-            
-        }
         
         if ($this->page == 'descubre') {
             
             $model_generos = new generosModel();
             $result_generos = $model_generos->select();
             $this->template->assign("generos", $result_generos);
+            
+            $modelHistorias = new historiasModel();
+            $result_historias = $modelHistorias->select('','','*',' LEFT JOIN wi_users ON (wi_historias.autor_id = wi_users.user_id) LEFT JOIN wi_generos ON (wi_historias.historia_genero_id = wi_generos.genero_id) ORDER BY historia_id ASC');
+            
+            $this->template->assign("historias", $result_historias);
             
         }
         
@@ -206,6 +185,15 @@ final class webController extends controller{
         $plantilla_header->assign('url', _URL_ENVIRONMENT);
         $plantilla_header->assign('page', $this->page);
         $plantilla_header->assign('show_menu', $show_menu);
+        
+        session_start();
+        if($_SESSION['name_user']){
+            $usuarioModel = new usersModel();
+            $resultado = $usuarioModel->select("user_id=".$_SESSION['user_id'])[0]->photo;
+            $plantilla_header->assign('testt', "hola");
+            $plantilla_header->assign('fotoPerfil', $resultado);
+        }
+        
         $descripcion = "";
         $nombre = "";
         $imagen = "";
@@ -337,7 +325,7 @@ final class webController extends controller{
     }
 
 
-    private function login($params) { 
+    private function login($params) {
 
 	$send = '';
 	$email = filter_var($params->user, FILTER_SANITIZE_EMAIL);
