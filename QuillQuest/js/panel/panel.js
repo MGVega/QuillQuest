@@ -244,7 +244,7 @@ addPage = function () {
                             '<div class="row mb-3 text-center">' +
                             '<div class="col-12">' +
                             '<span>Descripción</span><br>' +
-                            `<textarea class="page-content" data-page-id="${numPag}" maxlength="500" cols="60" rows="4"></textarea>` +
+                            `<textarea class="page-content" data-page-id="${numPag}" maxlength="500" rows="4" style="width: 80% !important;"></textarea>` +
                             '</div>' +
                             '</div>' +
                             '<div class="row text-center">' +
@@ -275,7 +275,7 @@ addSeleccion = function(numPag, opcion) {
     } else {
         button.prop("disabled", true);
         button.after('<input type="text" class="opcion-content form-control mt-2" data-page-id="' + numPag + '" data-opcion-id="' + opcion + '" data-target-page-id="' + pagTotal + '" placeholder="Escribe aquí la opción 2">');
-        button.after(`<a href="#pag_${pagTotal}"> Pág ${pagTotal} <i class="fa fa-arrow-down"></i></a>`);
+        button.after(`<a href="#pag_${pagTotal}" style="color: white !important;"> Pág ${pagTotal} <i class="fa fa-arrow-down"></i></a>`);
     }
 
     pagTotal++;

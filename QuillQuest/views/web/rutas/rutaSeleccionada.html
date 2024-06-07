@@ -38,7 +38,7 @@
                         [s/if $eleccion->pagina_id == $pagina->pagina_id/s]
                         [s/assign var=elecciones_disponibles value=$elecciones_disponibles+1/s]
                         <div class="col-md-6 text-center">
-                            <button style="max-width: 200px !important; white-space: normal !important; overflow-wrap: break-word !important;" class="btn background_color4" data-target="page-[s/$eleccion->pagina_destino_id/s]" onclick="mostrarPagina([s/$eleccion->pagina_destino_id/s])">[s/$eleccion->texto/s]</button>
+                            <button style="max-width: 200px !important; white-space: normal !important; overflow-wrap: break-word !important;" class="btn background_color4 mt-4" data-target="page-[s/$eleccion->pagina_destino_id/s]" onclick="mostrarPagina([s/$eleccion->pagina_destino_id/s])">[s/$eleccion->texto/s]</button>
                         </div>
                         [s//if/s]
                     [s//foreach/s]

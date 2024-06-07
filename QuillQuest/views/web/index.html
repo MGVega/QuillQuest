@@ -14,7 +14,7 @@
                   [s/foreach from=$historias_carro item=carro/s]
                   <div class="carousel-item [s/if $primera/s]active[s//if/s]">
                     <div class="carousel-overlay" style="position: absolute;top: 70%;left: 0;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.5);"></div>
-                    <img class="d-block w-100" src="[s/$carro->portada/s]" alt="First slide"  style="max-height: 465px;">
+                    <a href="rutaSeleccionada/[s/$carro->historia_id/s]"><img class="d-block w-100" src="[s/$carro->portada/s]" alt="First slide"  style="max-height: 465px;"></a>
                     <div class="carousel-caption d-none d-md-block color4">
                         <h4><a href="rutaSeleccionada/[s/$carro->historia_id/s]">[s/$carro->titulo/s]</a></h4>
                         <p>Género: [s/$carro->nombre_genero/s]</p>
