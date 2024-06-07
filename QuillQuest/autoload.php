@@ -46,14 +46,6 @@ function autoload($class_name) {
         include_once dirname(__FILE__) . '/models/baseModel.php';
     } elseif ($class_name == 'usersModel') {
         include_once dirname(__FILE__) . '/models/usersModel.php';
-    } elseif ($class_name == 'countriesModel') {
-        include_once dirname(__FILE__) . '/models/countriesModel.php';
-    } elseif ($class_name == 'comunidadesModel') {
-        include_once dirname(__FILE__) . '/models/comunidadesModel.php';
-    } elseif ($class_name == 'statesModel') {
-        include_once dirname(__FILE__) . '/models/statesModel.php';
-    } elseif ($class_name == 'citiesModel') {
-        include_once dirname(__FILE__) . '/models/citiesModel.php';
     } elseif ($class_name == 'encuestasModel') {
         include_once dirname(__FILE__) . '/models/encuestasModel.php';
     } elseif ($class_name == 'encuestasRespuestasModel') {
@@ -80,10 +72,6 @@ function autoload($class_name) {
         include_once dirname(__FILE__) . '/app/repository/preguntas/preguntaRepository.php';
     } elseif ($class_name == 'encuestaRepository') {
         include_once dirname(__FILE__) . '/app/repository/encuestas/encuestaRepository.php';
-    }elseif ($class_name == 'rutasPointsModel') {
-        include_once dirname(__FILE__) . '/models/rutasPointsModel.php';
-    }elseif ($class_name == 'rutasLatLonModel') {
-        include_once dirname(__FILE__) . '/models/rutasLatLonModel.php';
     }elseif ($class_name == 'generosModel') {
         include_once dirname(__FILE__) . '/models/generosModel.php';
     }elseif ($class_name == 'historiasModel') {

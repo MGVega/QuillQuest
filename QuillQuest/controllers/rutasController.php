@@ -59,9 +59,6 @@ final class rutasController extends controller{
 
         // - - - - - - - - - - - - - -
         
-        
-        
-        
         $modelHistorias = new historiasModel();
         $where = "historia_id=$this->ruta_id";
         $result_modelHistorias = $modelHistorias->select($where, '', '*', ' LEFT JOIN wi_generos ON(wi_historias.historia_genero_id=wi_generos.genero_id)');

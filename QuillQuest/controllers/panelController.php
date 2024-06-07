@@ -214,14 +214,6 @@ final class panelController extends controller{
 		$resultado = $this->modificarHistoria($params, $files);
 		break;
             
-            case 'graficos':
-		$resultado = $this->graficos();
-		break;
-            
-            case 'documentos':
-		$resultado = $this->documentos();
-		break;
-            
             case 'listado':
 		$resultado = $this->listado();
 		break;
@@ -547,111 +539,6 @@ final class panelController extends controller{
                 $imagenResponse = $imagenLocation;
             }
             return $imagenResponse;
-    }
-    
-    private function graficos(){
-        
-        $this->control_request = 'graficos';
-        
-        $encuestas = new encuestaRepository();
-        $dataCharts = new stdClass();
-        $dataChartsHtml = new stdClass();
-        
-        $dataCharts->paises = $encuestas->getEncuestasLocalizacion(4);
-        $dataCharts->comunidades = $encuestas->getEncuestasLocalizacion(3);
-        $dataCharts->provincias = $encuestas->getEncuestasLocalizacion(2);
-        $dataCharts->ciudades = $encuestas->getEncuestasLocalizacion(1);
-        
-        // obtendría las preguntas tipo opciones
-        $preguntas = new preguntaRepository();
-        $result_preguntas_opciones = $preguntas->getPreguntaPorTipo(2);
-        
-        foreach ($result_preguntas_opciones as $tipoOpcion) {
-            
-            $value = $tipoOpcion->pregunta_id;
-            $dataCharts->$value = $encuestas->getEncuestasOpciones($tipoOpcion->pregunta_id);
-            $dataCharts->$value->pregunta_id = $tipoOpcion->pregunta_id;
-            $dataCharts->$value->titulo = $tipoOpcion->titulo;
-            
-            $dataChartsHtml->$value = $encuestas->getEncuestasOpciones($tipoOpcion->pregunta_id);
-            $dataChartsHtml->$value->pregunta_id = $tipoOpcion->pregunta_id;
-            $dataChartsHtml->$value->titulo = $tipoOpcion->titulo;
-            
-        }
-        
-        $result_preguntas_multiple = $preguntas->getPreguntaPorTipo(3);
-        
-        foreach ($result_preguntas_multiple as $tipoOpcion) {
-            
-            $value = $tipoOpcion->pregunta_id;
-            $dataCharts->$value = $encuestas->getEncuestasOpcionesMultiple($tipoOpcion->pregunta_id);
-            $dataCharts->$value->pregunta_id = $tipoOpcion->pregunta_id;
-            $dataCharts->$value->titulo = $tipoOpcion->titulo;
-            
-            $dataChartsHtml->$value = $encuestas->getEncuestasOpcionesMultiple($tipoOpcion->pregunta_id);
-            $dataChartsHtml->$value->pregunta_id = $tipoOpcion->pregunta_id;
-            $dataChartsHtml->$value->titulo = $tipoOpcion->titulo;
-        }
-
-        
-        $this->extra = json_encode($dataCharts);
-        
-        $send = $this->template->fetch('panel/informes/graficos.html');
-        
-        return $this->getJSONEncode($send);
-    }
-
-    /**
-     * Guardar imagen
-     * @param type $id
-     * @param type $files
-     * @return type
-     */
-    private function guardarImagen($id, $files){
-
-        $imagenNombre = $files['ruta_imagen']['name'];
-            
-            // Getting file extension 
-            $imagen_new_name = explode(".", $imagenNombre);
-            $imagen_extension = end($imagen_new_name);
-            
-            if ($imagenNombre != ""){
-                //Borramos la imagen existente, por si introducimos otra que tenga una extension diferente se borre la antigua
-                $direccion_antigua = "../images/panel/rutas/imagen_ruta_$id";
-                unlink(glob($direccion_antigua . '*.{jpg,jpeg,png,gif}', GLOB_BRACE)[0]);
-            }
-            // Location 
-            $imagenLocation = "images/panel/rutas/imagen_ruta_$id.$imagen_extension";
-
-            // Upload file 
-            if (move_uploaded_file($files['ruta_imagen']['tmp_name'], "../" . $imagenLocation)) {
-                $imagenResponse = $imagenLocation;
-
-            }
-            return $imagenResponse;
-    }
-    
-    /**
-     * Guardar Fichero
-     * @param type $id
-     * @param type $files
-     * @return type
-     */
-    private function guardarFichero($id, $files){
-        $ficheronombre = $files['ruta_link_descarga']['name'];
-            
-            // Getting file extension 
-            $fichero_new_name = explode(".", $ficheronombre);
-            $fichero_extension = end($fichero_new_name);
-            
-            // Location 
-            $ficheroLocation = "documents/panel/rutas/fichero_ruta_$id.$fichero_extension";
-
-            // Upload file 
-            if (move_uploaded_file($files['ruta_link_descarga']['tmp_name'], "../" . $ficheroLocation)) {
-                $ficheroResponse = $ficheroLocation;
-            }
-            return $ficheroResponse;
     }
 
     private function perfil(){

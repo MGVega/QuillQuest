@@ -75,7 +75,7 @@ $(document).ready(function () {
         $("#btnLogin").addClass("notDisplay");
     };
 
-    headerfixed();
+    //headerfixed();
     
 });
 

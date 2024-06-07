@@ -62,14 +62,6 @@ final class webController extends controller{
             
         }
         
-        if ($this->page == 'rutas') {
-            // Al entrar en la página de rutas, cargamos la base de datos con las rutas            
-            $modelRutas = new rutasModel();
-            $result_modelRutas = $modelRutas->select(); // Array con las preguntas
-            
-            $this->template->assign("datosRutas", $result_modelRutas);
-        }
-        
         if(empty($this->page)){
             
             $modelHistorias = new historiasModel();
@@ -100,9 +92,6 @@ final class webController extends controller{
         $this->chargeFooter($extra, $show_footer);
 
         $this->printHeaderPos();
-        
-        
-        
 	
         if ($this->page == '') {
             $model = new analyticsModel();
@@ -110,23 +99,6 @@ final class webController extends controller{
             $visitas_principal = $resultModel[0]->visitas_principal;
             $visitas_principal++;
             $model->setVisitas_principal($visitas_principal);
-
-            $model->update("dato_id=1,");
-        } else
-            if ($this->page == 'encuesta') {
-            $model = new analyticsModel();
-            $resultModel = $model->select();
-            $visitas_encuesta = $resultModel[0]->visitas_encuesta;
-            $visitas_encuesta++;
-            $model->setVisitas_encuesta($visitas_encuesta);
-
-            $model->update("dato_id=1,");
-        } else if ($this->page == 'rutas') {
-            $model = new analyticsModel();
-            $resultModel = $model->select();
-            $visitas_rutas = $resultModel[0]->visitas_rutas;
-            $visitas_rutas++;
-            $model->setVisitas_rutas($visitas_rutas);
 
             $model->update("dato_id=1,");
         }
@@ -246,29 +218,9 @@ final class webController extends controller{
             case 'googleCaptcha':
                 $resultado = $this->googleCaptcha($params);
                 break;
-
-            case 'guardarEncuesta':
-                $resultado = $this->guardarEncuesta($params);
-                break;
-
+            
             case 'registrarUsuario':
                 $resultado = $this->registrarUsuario($params);
-                break;
-            
-            case 'obtenerProvincias':
-                $resultado = $this->obtenerProvincias($params);
-                break;
-            
-            case 'obtenerProvinciasComunidades':
-                $resultado = $this->obtenerProvinciasComunidades($params);
-                break;
-            
-            case 'obtenerComunidades':
-                $resultado = $this->obtenerComunidades($params);
-                break;
-            
-            case 'obtenerCiudades':
-                $resultado = $this->obtenerCiudades($params);
                 break;
 
             default:
