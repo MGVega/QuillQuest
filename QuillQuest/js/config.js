@@ -14,10 +14,13 @@
  var urlLogin = 'https://QuillQuest.wilowi.com/admin';*/
 // -----------------//
 
-var urlAjax = 'http://localhost/QuillQuest/QuillQuest/controllers/actionController.php';
+/*var urlAjax = 'http://localhost/QuillQuest/QuillQuest/controllers/actionController.php';
 var rootUrl = 'http://localhost/QuillQuest/QuillQuest/';
-var urlLogin = 'http://localhost/QuillQuest/QuillQuest/admin';
+var urlLogin = 'http://localhost/QuillQuest/QuillQuest/admin';*/
 
+var urlAjax = 'https://90dd-92-172-228-51.ngrok-free.app/quillquest/quillquest/controllers/actionController.php';
+var rootUrl = 'https://90dd-92-172-228-51.ngrok-free.app/quillquest/quillquest/';
+var urlLogin = 'https://90dd-92-172-228-51.ngrok-free.app/quillquest/quillquest/admin';
 
 // --- Enviar al servidor
 sendToServer = function (parametros, funcion_callback) {

@@ -7,10 +7,17 @@
 $server_document = filter_input(INPUT_SERVER,'DOCUMENT_ROOT',FILTER_SANITIZE_STRING);
 
 // ---- Entorno
-define("_ENVIRONMENT", 'localhost');
+/*define("_ENVIRONMENT", 'localhost');
 define("_URL_ENVIRONMENT",'http://localhost/quillquest/quillquest/');
 define("_URL_LOGS",'/mario/dataLogs/');
 define("_URL_MAIL",$server_document.'/quillquest/quillquest/');
+define("_KEY_CAPTCHA",'6Leh0k4UAAAAAJaZt96GG2S3d2IUwQ4Mfzxpejog');*/
+
+// ---- Entorno
+define("_ENVIRONMENT", 'localhost');
+define("_URL_ENVIRONMENT",'https://90dd-92-172-228-51.ngrok-free.app/quillquest/quillquest/');
+define("_URL_LOGS",'/mario/dataLogs/');
+define("_URL_MAIL",'https://90dd-92-172-228-51.ngrok-free.app/quillquest/quillquest/');
 define("_KEY_CAPTCHA",'6Leh0k4UAAAAAJaZt96GG2S3d2IUwQ4Mfzxpejog');
 
 /*define("_ENVIRONMENT", 'develop');
